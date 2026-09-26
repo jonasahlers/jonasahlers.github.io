@@ -67,8 +67,11 @@ src/data/types.ts        Profile, Job, Project, SkillGroup, Education, SocialLin
 src/data/profile.ts      the content (placeholder until the owner sends real details)
 src/lib/format.ts        formatPeriod(start, end?) → "2021 — 2023" | "2023 — Present" | "2022"
 src/layouts/Base.astro   <html>/<head>: meta, Open Graph, JSON-LD Person, fonts, theme script
+src/lib/seo.ts           personJsonLd(profile, url) → schema.org Person
+src/lib/icons.ts         inline SVG icon bodies (Simple Icons brands, Lucide UI icons)
 src/components/          Sidebar, Section, About, Experience, Projects, Skills, Education,
-                         Contact, TagList, SocialLinks, Icon, ThemeToggle, Spotlight
+                         Contact, Entry (shared row card), Period, TagList, SocialLinks, Icon,
+                         ThemeToggle, Spotlight
 src/styles/global.css    tokens (both themes), reset, base typography, focus ring, skip link
 src/pages/index.astro    composes the sections in order
 src/pages/favicon.svg.ts monogram favicon generated from the owner's initials at build time
