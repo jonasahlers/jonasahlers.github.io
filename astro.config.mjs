@@ -1,10 +1,18 @@
 // @ts-check
+import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
 
 export default defineConfig({
   // User site (repo "jonasahlers.github.io"), so no `base` path is needed.
   site: 'https://jonasahlers.github.io',
   devToolbar: { enabled: false },
+  integrations: [
+    // sitemap-index.xml for search engines, with each page's other-language version linked.
+    sitemap({
+      filter: (page) => page.endsWith('/'),
+      i18n: { defaultLocale: 'da', locales: { da: 'da', en: 'en' } },
+    }),
+  ],
   // Danish at /, English at /en/.
   i18n: {
     locales: ['da', 'en'],

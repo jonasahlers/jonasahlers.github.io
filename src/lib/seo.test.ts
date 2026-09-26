@@ -29,7 +29,7 @@ test('describes the person', () => {
 
 test('leaves out fields that have no data', () => {
   const data = personJsonLd(empty, 'https://example.com/');
-  for (const key of ['sameAs', 'knowsAbout', 'homeLocation', 'worksFor', 'alumniOf']) {
+  for (const key of ['alternateName', 'sameAs', 'knowsAbout', 'homeLocation', 'worksFor', 'alumniOf', 'subjectOf']) {
     assert.ok(!(key in data), `unexpected "${key}"`);
   }
 });
@@ -78,4 +78,26 @@ test('lists each school once', () => {
     '',
   );
   assert.deepEqual(data.alumniOf, [{ '@type': 'EducationalOrganization', name: 'Uni' }]);
+});
+
+test('gives the other name the person appears under', () => {
+  const data = personJsonLd({ ...empty, alternateName: 'Ada King' }, '');
+  assert.equal(data.alternateName, 'Ada King');
+});
+
+test('links articles and awards about the person', () => {
+  const data = personJsonLd(
+    {
+      ...empty,
+      references: [
+        { title: 'Engine found', source: 'Paper', date: '2026', href: 'https://example.com/a' },
+        { title: 'Prize', source: 'Society', date: '2025' },
+      ],
+    },
+    '',
+  );
+  assert.deepEqual(data.subjectOf, [
+    { '@type': 'CreativeWork', name: 'Engine found', url: 'https://example.com/a' },
+    { '@type': 'CreativeWork', name: 'Prize' },
+  ]);
 });

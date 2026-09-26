@@ -242,3 +242,14 @@ Body text stays Inter.
 - **Sidebar:** the seventh nav item pushed the footer below the fold at 1366×650. Below 720px
   window height the nav tightens (smaller gaps and link padding); the footer now fits at every
   pinned height (641–720px has 5–48px spare).
+
+## Iteration 8: trims and search
+
+- Removed the "This website" project and the hummel links on the Experience entries (owner's
+  request).
+- Search: `sitemap-index.xml` via `@astrojs/sitemap` (with `da`/`en` alternates matching the page
+  head), `robots.txt` pointing at it, and a 1200×630 `og.png` (name and address only, so it
+  fits both languages) with `summary_large_image`. The Person JSON-LD gains
+  `alternateName: "Jonas Ahlers Nielsen"` (the full name used by the article, Proff, and the CVR
+  register) and `subjectOf` for each reference, so search engines can connect the article to
+  the site. Indexing itself needs Google Search Console, which is done by the owner.

@@ -63,6 +63,8 @@ export interface Reference {
 
 export interface Profile {
   name: string;
+  /** Another name you appear under, e.g. your full name in an article; search engines link the two. */
+  alternateName?: string;
   role: string;
   /** One sentence under your name; also the page's meta description. */
   tagline: string;

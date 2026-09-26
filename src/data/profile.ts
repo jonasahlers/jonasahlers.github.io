@@ -7,6 +7,7 @@ import type { Profile } from './types';
 // missing field or a malformed date ("2023" or "2023-04") stops it with a clear error.
 export const profile: Localized<Profile> = {
   name: 'Jonas Ahlers',
+  alternateName: 'Jonas Ahlers Nielsen',
   role: { da: 'Softwareudvikler', en: 'Software Developer' },
   tagline: {
     da: 'Junior integrationsudvikler hos hummel med en kandidatgrad i datalogi fra Aarhus Universitet.',
@@ -40,7 +41,6 @@ export const profile: Localized<Profile> = {
     {
       role: { da: 'Junior integrationsudvikler', en: 'Junior Integration Developer' },
       company: 'hummel',
-      href: 'https://hummel.net',
       start: '2026-08',
       summary: {
         da: 'Fuldtid. Jeg bygger og vedligeholder de integrationer, der forbinder hummels systemer og samarbejdspartnere.',
@@ -53,7 +53,6 @@ export const profile: Localized<Profile> = {
         en: 'Student Worker, BC Development and Integration',
       },
       company: 'hummel',
-      href: 'https://hummel.net',
       start: '2023-04',
       end: '2026-08',
       summary: {
@@ -103,15 +102,6 @@ export const profile: Localized<Profile> = {
         en: 'Bachelor project (2024): a parallel algorithm for the single-source shortest path (SSSP) problem in CUDA, with optimized memory access and thread synchronization. Benchmarked against CPU-based implementations, it achieved a significant speedup.',
       },
       tech: ['CUDA C++', { da: 'Parallel programmering', en: 'Parallel programming' }, 'Benchmarking'],
-    },
-    {
-      name: { da: 'Denne hjemmeside', en: 'This website' },
-      description: {
-        da: 'Mit CV på én side, bygget med Astro og TypeScript og udgivet på GitHub Pages af GitHub Actions ved hvert push.',
-        en: 'My one-page CV, built with Astro and TypeScript and deployed to GitHub Pages by GitHub Actions on every push.',
-      },
-      repo: 'https://github.com/jonasahlers/jonasahlers.github.io',
-      tech: ['Astro', 'TypeScript', 'CSS'],
     },
   ],
   skills: [

@@ -6,10 +6,16 @@ export function personJsonLd(profile: Profile, url: string) {
   const sameAs = profile.socials.map((link) => link.href);
   const knowsAbout = profile.skills.flatMap((group) => group.items);
   const schools = [...new Set(profile.education.map((entry) => entry.school))];
+  const mentions = profile.references.map(({ title, href }) => ({
+    '@type': 'CreativeWork',
+    name: title,
+    ...(href ? { url: href } : {}),
+  }));
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: profile.name,
+    ...(profile.alternateName ? { alternateName: profile.alternateName } : {}),
     jobTitle: profile.role,
     description: profile.tagline,
     url,
@@ -20,5 +26,6 @@ export function personJsonLd(profile: Profile, url: string) {
     ...(schools.length > 0
       ? { alumniOf: schools.map((name) => ({ '@type': 'EducationalOrganization', name })) }
       : {}),
+    ...(mentions.length > 0 ? { subjectOf: mentions } : {}),
   };
 }

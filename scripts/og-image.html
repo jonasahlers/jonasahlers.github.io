@@ -1,0 +1,100 @@
+<!doctype html>
+<!--
+  Source of public/og.png, the 1200×630 preview shown when the site is shared (LinkedIn, Slack…).
+  It carries only the name and address, so it fits both languages. After editing, regenerate with:
+
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --hide-scrollbars \
+    --force-device-scale-factor=1 --window-size=1200,630 --virtual-time-budget=5000 \
+    --screenshot=public/og.png scripts/og-image.html
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&family=Plus+Jakarta+Sans:wght@800&display=block"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      /* Same tokens and "rising sun" background as the site (src/styles/global.css). */
+      body {
+        position: relative;
+        overflow: hidden;
+        width: 1200px;
+        height: 630px;
+        background: #fff8ec;
+        color: #231a14;
+        font-family: Inter, sans-serif;
+      }
+
+      body::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 8% -10%, rgb(255 203 86 / 0.55), rgb(255 126 126 / 0.2) 38%, transparent 62%);
+      }
+
+      body::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: repeating-radial-gradient(circle at 8% -10%, rgb(255 162 89 / 0.35) 0 1.5px, transparent 2px 44px);
+        mask-image: radial-gradient(circle at 8% -10%, #000 20%, transparent 70%);
+      }
+
+      main {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 100%;
+        padding: 88px 96px;
+      }
+
+      .monogram {
+        display: grid;
+        place-items: center;
+        width: 120px;
+        height: 120px;
+        margin-bottom: 44px;
+        border-radius: 34px;
+        background: linear-gradient(135deg, #ffcb56, #ffa259 55%, #ff7e7e);
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 50px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      h1 {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 124px;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 1;
+      }
+
+      p {
+        margin-top: 28px;
+        color: #9a3412;
+        font-size: 34px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="monogram">JA</div>
+      <h1>Jonas Ahlers</h1>
+      <p>jonasahlers.github.io</p>
+    </main>
+  </body>
+</html>
