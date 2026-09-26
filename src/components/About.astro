@@ -1,4 +1,5 @@
 ---
+import { useTranslations } from '../i18n/ui';
 import Section from './Section.astro';
 
 interface Props {
@@ -6,9 +7,10 @@ interface Props {
 }
 
 const { paragraphs } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
 ---
 
-<Section id="about" label="About">
+<Section id="about" label={t('section.about')}>
   <div class="about">
     {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
   </div>

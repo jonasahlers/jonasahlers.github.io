@@ -1,17 +1,19 @@
 ---
 import type { Profile } from '../data/types';
-import type { SectionLink } from '../lib/sections';
+import { useTranslations } from '../i18n/ui';
 import Avatar from './Avatar.astro';
 import Icon from './Icon.astro';
+import LanguageToggle from './LanguageToggle.astro';
 import SocialLinks from './SocialLinks.astro';
 import ThemeToggle from './ThemeToggle.astro';
 
 interface Props {
   profile: Profile;
-  sections: SectionLink[];
+  sections: { id: string; label: string }[];
 }
 
 const { profile, sections } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <header class="sidebar">
@@ -38,7 +40,7 @@ const { profile, sections } = Astro.props;
         </p>
       )
     }
-    <nav class="nav reveal" style="--order: 5" aria-label="Sections">
+    <nav class="nav reveal" style="--order: 5" aria-label={t('nav.label')}>
       <ul role="list">
         {
           sections.map(({ id, label }) => (
@@ -55,7 +57,10 @@ const { profile, sections } = Astro.props;
   </div>
   <div class="footer reveal" style="--order: 6">
     <SocialLinks links={profile.socials} email={profile.email} />
-    <ThemeToggle />
+    <div class="switches">
+      <LanguageToggle />
+      <ThemeToggle />
+    </div>
   </div>
 </header>
 
@@ -274,8 +279,15 @@ const { profile, sections } = Astro.props;
 
   .footer {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem 1.5rem;
     margin-top: clamp(1rem, 3vh, 2rem);
+  }
+
+  .switches {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 </style>

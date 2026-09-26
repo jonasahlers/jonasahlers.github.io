@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
-import { profile } from '../data/profile';
+import { getProfile } from '../data/profile';
+import { DEFAULT_LOCALE } from '../i18n/locales';
 import { initials } from '../lib/format';
 
 // A monogram favicon, generated from the profile name at build time. It mirrors the avatar:
@@ -15,7 +16,7 @@ export const GET: APIRoute = () => {
     </linearGradient>
   </defs>
   <rect width="64" height="64" rx="18" fill="url(#g)"/>
-  <text x="32" y="42" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="26" font-weight="800" letter-spacing="-1" fill="#231a14">${initials(profile.name)}</text>
+  <text x="32" y="42" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="26" font-weight="800" letter-spacing="-1" fill="#231a14">${initials(getProfile(DEFAULT_LOCALE).name)}</text>
 </svg>`;
   return new Response(svg, { headers: { 'Content-Type': 'image/svg+xml' } });
 };

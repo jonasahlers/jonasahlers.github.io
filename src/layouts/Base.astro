@@ -1,5 +1,8 @@
 ---
 import { Font } from 'astro:assets';
+import { getAbsoluteLocaleUrl } from 'astro:i18n';
+import { DEFAULT_LOCALE, LOCALES, toLocale } from '../i18n/locales';
+import { useTranslations } from '../i18n/ui';
 import '../styles/global.css';
 
 interface Props {
@@ -9,6 +12,8 @@ interface Props {
 }
 
 const { title, description, jsonLd } = Astro.props;
+const locale = toLocale(Astro.currentLocale);
+const t = useTranslations(locale);
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 // Escape "<" so profile text can never end the JSON-LD <script> early.
@@ -16,19 +21,22 @@ const structuredData = JSON.stringify(jsonLd).replace(/</g, '\\u003c');
 ---
 
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang={locale} data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {LOCALES.map((alternate) => <link rel="alternate" hreflang={alternate} href={getAbsoluteLocaleUrl(alternate)} />)}
+    <link rel="alternate" hreflang="x-default" href={getAbsoluteLocaleUrl(DEFAULT_LOCALE)} />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <meta name="theme-color" content="#fff8ec" />
     <meta property="og:type" content="profile" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={t('meta.locale')} />
     <meta name="twitter:card" content="summary" />
     <meta name="generator" content={Astro.generator} />
     <Font cssVariable="--font-inter" preload />
@@ -46,7 +54,7 @@ const structuredData = JSON.stringify(jsonLd).replace(/</g, '\\u003c');
     <script type="application/ld+json" set:html={structuredData} />
   </head>
   <body>
-    <a class="skip-link" href="#content">Skip to content</a>
+    <a class="skip-link" href="#content">{t('skip')}</a>
     <slot />
   </body>
 </html>

@@ -1,9 +1,12 @@
 ---
+import { useTranslations } from '../i18n/ui';
 import Icon from './Icon.astro';
+
+const t = useTranslations(Astro.currentLocale);
 ---
 
-<button class="toggle" type="button" aria-pressed="false" title="Toggle dark theme" data-theme-toggle hidden>
-  <span class="sr-only">Dark theme</span>
+<button class="toggle" type="button" aria-pressed="false" title={t('theme.toggle')} data-theme-toggle hidden>
+  <span class="sr-only">{t('theme.dark')}</span>
   <span class="moon"><Icon name="moon" size={18} /></span>
   <span class="sun"><Icon name="sun" size={18} /></span>
 </button>

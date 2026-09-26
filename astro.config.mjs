@@ -5,6 +5,12 @@ export default defineConfig({
   // User site (repo "jonasahlers.github.io"), so no `base` path is needed.
   site: 'https://jonasahlers.github.io',
   devToolbar: { enabled: false },
+  // Danish at /, English at /en/.
+  i18n: {
+    locales: ['da', 'en'],
+    defaultLocale: 'da',
+    routing: { prefixDefaultLocale: false },
+  },
   fonts: [
     {
       provider: fontProviders.fontsource(),

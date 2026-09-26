@@ -1,0 +1,71 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { LOCALES, toLocale } from '../i18n/locales';
+import { LANGUAGE_NAMES, useTranslations } from '../i18n/ui';
+
+const current = toLocale(Astro.currentLocale);
+const t = useTranslations(current);
+---
+
+<nav class="languages" aria-label={t('lang.label')}>
+  {
+    LOCALES.map((locale) => (
+      <a
+        class="language"
+        href={getRelativeLocaleUrl(locale)}
+        hreflang={locale}
+        lang={locale}
+        aria-label={LANGUAGE_NAMES[locale]}
+        aria-current={locale === current ? 'page' : undefined}
+        data-language-link
+      >
+        {locale.toUpperCase()}
+      </a>
+    ))
+  }
+</nav>
+
+<script>
+  // Switching language keeps the visitor on the section they were reading (ids match across pages).
+  for (const link of document.querySelectorAll<HTMLAnchorElement>('[data-language-link]')) {
+    link.addEventListener('click', () => {
+      const section = document.querySelector<HTMLElement>('[data-section][aria-current]')?.dataset.section;
+      if (section && window.scrollY > 0) link.hash = section;
+    });
+  }
+</script>
+
+<style>
+  .languages {
+    display: inline-flex;
+    padding: 0.1875rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+  }
+
+  .language {
+    display: grid;
+    place-items: center;
+    min-width: 2.25rem;
+    height: 1.75rem;
+    padding-inline: 0.5rem;
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    transition:
+      color 150ms ease,
+      background-color 150ms ease;
+  }
+
+  .language:is(:hover, :focus-visible) {
+    color: var(--text);
+  }
+
+  .language[aria-current] {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+</style>

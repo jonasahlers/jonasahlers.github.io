@@ -1,5 +1,6 @@
 ---
 import type { SocialLink } from '../data/types';
+import { useTranslations } from '../i18n/ui';
 import Icon from './Icon.astro';
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
 }
 
 const { links, email } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <ul class="socials" role="list">
@@ -16,15 +18,15 @@ const { links, email } = Astro.props;
       <li>
         <a class="social" href={href} target="_blank" rel="noreferrer" title={label}>
           <Icon name={icon} size={22} />
-          <span class="sr-only">{label} (opens in a new tab)</span>
+          <span class="sr-only">{label} {t('newTab')}</span>
         </a>
       </li>
     ))
   }
   <li>
-    <a class="social" href={`mailto:${email}`} title="Email">
+    <a class="social" href={`mailto:${email}`} title={t('social.email')}>
       <Icon name="mail" size={22} />
-      <span class="sr-only">Email</span>
+      <span class="sr-only">{t('social.email')}</span>
     </a>
   </li>
 </ul>

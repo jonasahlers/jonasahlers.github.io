@@ -1,0 +1,84 @@
+---
+import About from '../components/About.astro';
+import Contact from '../components/Contact.astro';
+import Education from '../components/Education.astro';
+import Experience from '../components/Experience.astro';
+import Projects from '../components/Projects.astro';
+import Sidebar from '../components/Sidebar.astro';
+import Skills from '../components/Skills.astro';
+import Spotlight from '../components/Spotlight.astro';
+import { getProfile } from '../data/profile';
+import { toLocale } from '../i18n/locales';
+import { useTranslations } from '../i18n/ui';
+import { visibleSections, type SectionId } from '../lib/sections';
+import { personJsonLd } from '../lib/seo';
+import Base from './Base.astro';
+
+// The whole CV, rendered once per language (src/pages/index.astro and src/pages/en/index.astro).
+const locale = toLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const profile = getProfile(locale);
+const ids = visibleSections(profile);
+const sections = ids.map((id) => ({ id, label: t(`section.${id}`) }));
+const has = (id: SectionId) => ids.includes(id);
+const year = new Date().getFullYear();
+---
+
+<Base
+  title={`${profile.name} — ${profile.role}`}
+  description={profile.tagline}
+  jsonLd={personJsonLd(profile, Astro.site?.href ?? '')}
+>
+  <Spotlight />
+  <div class="page">
+    <Sidebar profile={profile} sections={sections} />
+    <div class="content reveal" style="--order: 2">
+      <main id="content" tabindex="-1">
+        {has('about') && <About paragraphs={profile.about} />}
+        {has('experience') && <Experience jobs={profile.experience} />}
+        {has('education') && <Education entries={profile.education} />}
+        {has('projects') && <Projects projects={profile.projects} />}
+        {has('skills') && <Skills groups={profile.skills} />}
+        <Contact email={profile.email} note={profile.contactNote} socials={profile.socials} />
+      </main>
+      <footer class="colophon">
+        <p>© {year} {profile.name}. {t('footer.builtWith')} <a class="link" href="https://astro.build" target="_blank" rel="noreferrer">Astro<span class="sr-only"> {t('newTab')}</span></a> {t('footer.hosted')}</p>
+      </footer>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .page {
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .content {
+    padding-top: 2rem;
+  }
+
+  main:focus {
+    outline: none;
+  }
+
+  @media (min-width: 1024px) {
+    .page {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .content {
+      width: 52%;
+      padding-top: var(--page-top);
+    }
+  }
+
+  .colophon {
+    max-width: 28rem;
+    padding-bottom: 4rem;
+    font-size: 0.875rem;
+  }
+</style>

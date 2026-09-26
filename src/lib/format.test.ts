@@ -23,8 +23,14 @@ test('collapses a period within one year', () => {
 });
 
 test('accepts a custom separator for screen-reader text', () => {
-  assert.equal(formatPeriod('2021', '2023', ' to '), '2021 to 2023');
-  assert.equal(formatPeriod('2022-06', '2022-08', ' to '), 'Jun to Aug\u00a02022');
+  assert.equal(formatPeriod('2021', '2023', { separator: ' to ' }), '2021 to 2023');
+  assert.equal(formatPeriod('2022-06', '2022-08', { separator: ' to ' }), 'Jun to Aug\u00a02022');
+});
+
+test('speaks Danish when asked', () => {
+  assert.equal(formatPeriod('2023', undefined, { locale: 'da' }), '2023 — nu');
+  assert.equal(formatPeriod('2021-06', '2023-03', { locale: 'da' }), 'jun.\u00a02021 — mar.\u00a02023');
+  assert.equal(formatPeriod('2022-05', '2022-08', { locale: 'da', separator: ' til ' }), 'maj til aug.\u00a02022');
 });
 
 test('rejects malformed dates with a helpful message', () => {

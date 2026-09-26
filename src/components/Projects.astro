@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { Project } from '../data/types';
+import { useTranslations } from '../i18n/ui';
 import Entry from './Entry.astro';
 import Icon from './Icon.astro';
 import ProjectCover from './ProjectCover.astro';
@@ -12,9 +13,10 @@ interface Props {
 }
 
 const { projects } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
 ---
 
-<Section id="projects" label="Projects">
+<Section id="projects" label={t('section.projects')}>
   <ol role="list">
     {
       projects.map((project, index) => (
@@ -30,8 +32,8 @@ const { projects } = Astro.props;
           {project.href && project.repo && (
             <a class="source" href={project.repo} target="_blank" rel="noreferrer">
               <Icon name="github" size={16} />
-              Source code
-              <span class="sr-only"> (opens in a new tab)</span>
+              {t('project.source')}
+              <span class="sr-only"> {t('newTab')}</span>
             </a>
           )}
           {project.tech && project.tech.length > 0 && <TagList tags={project.tech} />}

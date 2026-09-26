@@ -1,10 +1,13 @@
 ---
+import { useTranslations } from '../i18n/ui';
+
 interface Props {
   tags: string[];
   label?: string;
 }
 
-const { tags, label = 'Technologies' } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
+const { tags, label = t('tags.label') } = Astro.props;
 ---
 
 <ul class="tags" role="list" aria-label={label}>

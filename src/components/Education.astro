@@ -1,5 +1,6 @@
 ---
 import type { Education as EducationEntry } from '../data/types';
+import { useTranslations } from '../i18n/ui';
 import Entry from './Entry.astro';
 import Period from './Period.astro';
 import Section from './Section.astro';
@@ -9,9 +10,10 @@ interface Props {
 }
 
 const { entries } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
 ---
 
-<Section id="education" label="Education">
+<Section id="education" label={t('section.education')}>
   <ol role="list">
     {
       entries.map((entry) => (

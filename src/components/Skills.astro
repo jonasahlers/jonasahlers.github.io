@@ -1,5 +1,6 @@
 ---
 import type { SkillGroup } from '../data/types';
+import { useTranslations } from '../i18n/ui';
 import Section from './Section.astro';
 import TagList from './TagList.astro';
 
@@ -8,9 +9,10 @@ interface Props {
 }
 
 const { groups } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
 ---
 
-<Section id="skills" label="Skills">
+<Section id="skills" label={t('section.skills')}>
   <dl class="skills">
     {
       groups.map(({ label, items }) => (

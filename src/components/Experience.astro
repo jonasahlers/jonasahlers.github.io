@@ -1,5 +1,6 @@
 ---
 import type { Job } from '../data/types';
+import { useTranslations } from '../i18n/ui';
 import Entry from './Entry.astro';
 import Period from './Period.astro';
 import Section from './Section.astro';
@@ -10,9 +11,10 @@ interface Props {
 }
 
 const { jobs } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
 ---
 
-<Section id="experience" label="Experience">
+<Section id="experience" label={t('section.experience')}>
   <ol role="list">
     {
       jobs.map((job) => (

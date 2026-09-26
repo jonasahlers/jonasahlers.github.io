@@ -1,5 +1,7 @@
 ---
 import type { YearMonth } from '../data/types';
+import { toLocale } from '../i18n/locales';
+import { useTranslations } from '../i18n/ui';
 import { formatPeriod } from '../lib/format';
 
 interface Props {
@@ -8,11 +10,13 @@ interface Props {
 }
 
 const { start, end } = Astro.props;
+const locale = toLocale(Astro.currentLocale);
+const t = useTranslations(locale);
 ---
 
 <p class="period">
-  <span aria-hidden="true">{formatPeriod(start, end)}</span>
-  <span class="sr-only">{formatPeriod(start, end, ' to ')}</span>
+  <span aria-hidden="true">{formatPeriod(start, end, { locale })}</span>
+  <span class="sr-only">{formatPeriod(start, end, { locale, separator: t('period.to') })}</span>
 </p>
 
 <style>

@@ -1,6 +1,11 @@
 import type { YearMonth } from '../data/types';
+import type { Locale } from '../i18n/locales';
 
-const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const MONTHS: Record<Locale, string[]> = {
+  en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  da: ['jan.', 'feb.', 'mar.', 'apr.', 'maj', 'jun.', 'jul.', 'aug.', 'sep.', 'okt.', 'nov.', 'dec.'],
+};
+const PRESENT: Record<Locale, string> = { en: 'Present', da: 'nu' };
 
 interface ParsedDate {
   year: number;
@@ -16,31 +21,38 @@ function parse(value: string): ParsedDate {
   return { year: Number(match[1]), month };
 }
 
-function monthName(month: number): string {
-  return MONTHS[month - 1]!;
+function monthName(month: number, locale: Locale): string {
+  return MONTHS[locale][month - 1]!;
 }
 
 // A no-break space keeps "Jun 2021" together when a narrow date column wraps.
-function label({ year, month }: ParsedDate): string {
-  return month === undefined ? `${year}` : `${monthName(month)}\u00a0${year}`;
+function label({ year, month }: ParsedDate, locale: Locale): string {
+  return month === undefined ? `${year}` : `${monthName(month, locale)}\u00a0${year}`;
+}
+
+interface PeriodOptions {
+  locale?: Locale;
+  /** Between the two dates; screen-reader text uses a word such as " to ". */
+  separator?: string;
 }
 
 /**
  * Formats a date range for display: "2021 — 2023", "Jun 2021 — Present",
  * "Jun — Aug 2022", or just "2022" when it starts and ends in the same year.
  */
-export function formatPeriod(start: YearMonth, end?: YearMonth, separator = ' — '): string {
+export function formatPeriod(start: YearMonth, end?: YearMonth, options: PeriodOptions = {}): string {
+  const { locale = 'en', separator = ' — ' } = options;
   const from = parse(start);
-  if (end === undefined) return `${label(from)}${separator}Present`;
+  if (end === undefined) return `${label(from, locale)}${separator}${PRESENT[locale]}`;
 
   const to = parse(end);
   if (to.year < from.year || (to.year === from.year && (to.month ?? 12) < (from.month ?? 1))) {
     throw new Error(`The period "${start}" to "${end}" ends before it starts.`);
   }
-  if (from.year !== to.year) return `${label(from)}${separator}${label(to)}`;
+  if (from.year !== to.year) return `${label(from, locale)}${separator}${label(to, locale)}`;
   if (from.month === undefined || to.month === undefined) return `${from.year}`;
-  if (from.month === to.month) return label(from);
-  return `${monthName(from.month)}${separator}${label(to)}`;
+  if (from.month === to.month) return label(from, locale);
+  return `${monthName(from.month, locale)}${separator}${label(to, locale)}`;
 }
 
 /** "Jonas Ahlers" → "JA": the first letters of the first and last name. */
