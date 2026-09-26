@@ -1,9 +1,60 @@
 ---
+import Sidebar from '../components/Sidebar.astro';
+import Spotlight from '../components/Spotlight.astro';
 import { profile } from '../data/profile';
 import Base from '../layouts/Base.astro';
 import { personJsonLd } from '../lib/seo';
+
+// A section with no content is left out of both the page and the nav.
+const sections = [
+  profile.about.length > 0 && { id: 'about', label: 'About' },
+  profile.experience.length > 0 && { id: 'experience', label: 'Experience' },
+  profile.projects.length > 0 && { id: 'projects', label: 'Projects' },
+  profile.skills.length > 0 && { id: 'skills', label: 'Skills' },
+  profile.education.length > 0 && { id: 'education', label: 'Education' },
+  { id: 'contact', label: 'Contact' },
+].filter((section) => section !== false);
 ---
 
-<Base title={`${profile.name} — ${profile.role}`} description={profile.tagline} jsonLd={personJsonLd(profile, Astro.site?.href ?? '')}>
-  <main id="content"><h1>{profile.name}</h1></main>
+<Base
+  title={`${profile.name} — ${profile.role}`}
+  description={profile.tagline}
+  jsonLd={personJsonLd(profile, Astro.site?.href ?? '')}
+>
+  <Spotlight />
+  <div class="page">
+    <Sidebar profile={profile} sections={sections} />
+    <main id="content" tabindex="-1">
+      <p>Sections arrive in the next task.</p>
+    </main>
+  </div>
 </Base>
+
+<style>
+  .page {
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  main {
+    padding-block: 4rem 0;
+  }
+
+  main:focus {
+    outline: none;
+  }
+
+  @media (min-width: 1024px) {
+    .page {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    main {
+      width: 52%;
+      padding-block: 6rem 0;
+    }
+  }
+</style>

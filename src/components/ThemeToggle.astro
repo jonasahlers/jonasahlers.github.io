@@ -1,0 +1,75 @@
+---
+import Icon from './Icon.astro';
+---
+
+<button class="toggle" type="button" aria-pressed="false" title="Toggle dark theme" data-theme-toggle hidden>
+  <span class="sr-only">Dark theme</span>
+  <span class="moon"><Icon name="moon" size={18} /></span>
+  <span class="sun"><Icon name="sun" size={18} /></span>
+</button>
+
+<script>
+  const root = document.documentElement;
+  const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]');
+
+  function sync() {
+    for (const button of buttons) button.setAttribute('aria-pressed', String(root.dataset.theme === 'dark'));
+    themeColor?.setAttribute('content', getComputedStyle(root).getPropertyValue('--bg').trim());
+  }
+
+  for (const button of buttons) {
+    button.hidden = false;
+    button.addEventListener('click', () => {
+      const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      root.dataset.theme = next;
+      try {
+        localStorage.setItem('theme', next);
+      } catch {
+        // Storage can be blocked (e.g. private mode); the toggle still works for this visit.
+      }
+      sync();
+    });
+  }
+
+  sync();
+</script>
+
+<style>
+  .toggle {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--muted);
+    cursor: pointer;
+    transition:
+      color 150ms ease,
+      border-color 150ms ease;
+  }
+
+  .toggle[hidden] {
+    display: none;
+  }
+
+  .toggle:hover {
+    border-color: var(--muted);
+    color: var(--text);
+  }
+
+  .sun {
+    display: none;
+  }
+
+  :global([data-theme='dark']) .sun {
+    display: block;
+  }
+
+  :global([data-theme='dark']) .moon {
+    display: none;
+  }
+</style>

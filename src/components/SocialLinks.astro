@@ -1,0 +1,50 @@
+---
+import type { SocialLink } from '../data/types';
+import Icon from './Icon.astro';
+
+interface Props {
+  links: SocialLink[];
+  email: string;
+}
+
+const { links, email } = Astro.props;
+---
+
+<ul class="socials" role="list">
+  {
+    links.map(({ label, href, icon }) => (
+      <li>
+        <a class="social" href={href} target="_blank" rel="noreferrer" title={label}>
+          <Icon name={icon} size={22} />
+          <span class="sr-only">{label} (opens in a new tab)</span>
+        </a>
+      </li>
+    ))
+  }
+  <li>
+    <a class="social" href={`mailto:${email}`} title="Email">
+      <Icon name="mail" size={22} />
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+</ul>
+
+<style>
+  .socials {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .social {
+    display: block;
+    margin: -0.25rem;
+    padding: 0.25rem;
+    color: var(--muted);
+    transition: color 150ms ease;
+  }
+
+  .social:hover {
+    color: var(--text);
+  }
+</style>
