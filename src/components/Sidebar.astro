@@ -123,12 +123,11 @@ const t = useTranslations(Astro.currentLocale);
       flex-direction: column;
       justify-content: space-between;
       width: 48%;
-      height: 100vh;
-      /* If the content is ever taller than the window, scroll the sidebar rather than cut it off.
-         The inline padding (offset by the margin) keeps focus rings at the left edge unclipped. */
-      overflow-y: auto;
-      margin-left: -0.5rem;
-      padding: var(--page-top) 0.5rem;
+      /* Never a scroll container of its own: one would capture the trackpad or wheel over the
+         left column and swallow fast scrolls. If the content is ever taller than the window,
+         the sidebar simply grows; it stays pinned and its end comes into view at the page end. */
+      min-height: 100vh;
+      padding-block: var(--page-top);
     }
   }
 
@@ -136,8 +135,7 @@ const t = useTranslations(Astro.currentLocale);
   @media (min-width: 1024px) and (max-height: 640px) {
     .sidebar {
       position: static;
-      height: auto;
-      overflow-y: visible;
+      min-height: 0;
     }
   }
 
@@ -216,7 +214,7 @@ const t = useTranslations(Astro.currentLocale);
   }
 
   .tagline {
-    max-width: 23rem;
+    max-width: 26rem;
     margin-top: 1rem;
     line-height: 1.6;
     text-wrap: pretty;

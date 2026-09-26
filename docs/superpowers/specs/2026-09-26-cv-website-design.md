@@ -25,7 +25,8 @@ must look polished, load instantly, and let the owner swap in their real details
 - **≥1024 px:** max width 1280 px, two columns (48% / 52%) sharing one top padding
   (`--page-top`, scales with window height). The left column is `position: sticky`, full viewport
   height: name (h1), role, tagline, location, section nav, social links, theme toggle; if its
-  content is taller than the window it scrolls, and below 640 px of height it isn't pinned at all.
+  content is taller than the window it grows (never its own scroll container, which would
+  swallow fast trackpad scrolls over the left column), and below 640 px of height it isn't pinned.
   The right column scrolls: About → Experience → Projects → Skills → Education → Contact, then a
   `footer` landmark (colophon).
 - **<1024 px:** one column. The sidebar becomes a normal header (the nav is hidden); each section's
