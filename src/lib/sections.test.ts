@@ -20,7 +20,7 @@ const full: Profile = {
 const ids = (profile: Profile) => visibleSections(profile).map((section) => section.id);
 
 test('lists every section in page order', () => {
-  assert.deepEqual(ids(full), ['about', 'experience', 'projects', 'skills', 'education', 'contact']);
+  assert.deepEqual(ids(full), ['about', 'experience', 'education', 'projects', 'skills', 'contact']);
   assert.equal(visibleSections(full)[0]?.label, 'About');
 });
 

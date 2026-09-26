@@ -29,9 +29,9 @@ const year = new Date().getFullYear();
       <main id="content" tabindex="-1">
         {has('about') && <About paragraphs={profile.about} />}
         {has('experience') && <Experience jobs={profile.experience} />}
+        {has('education') && <Education entries={profile.education} />}
         {has('projects') && <Projects projects={profile.projects} />}
         {has('skills') && <Skills groups={profile.skills} />}
-        {has('education') && <Education entries={profile.education} />}
         <Contact email={profile.email} note={profile.contactNote} socials={profile.socials} />
       </main>
       <footer class="colophon">

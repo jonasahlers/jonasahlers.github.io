@@ -61,7 +61,7 @@ Inter (variable, Latin subset) self-hosted via Astro's Fonts API. Tabular figure
 | `--text` | `#0b1220` | `#e7ecf2` |
 | `--muted` | `#475569` | `#93a1b0` |
 | `--border` | `#dfe5ec` | `#1f2a36` |
-| `--accent` | `#025f40` | `#6ee7b7` |
+| `--accent` | `#075985` | `#7dd3fc` |
 
 The accent is a single token per theme; its final hue is tuned during visual iteration, but any
 replacement must keep ≥4.5:1 against `--bg` and `--surface`. Type scale: name 48/52 (mobile 36/40),

@@ -18,7 +18,7 @@ export function personJsonLd(profile: Profile, url: string) {
     ...(profile.location ? { homeLocation: { '@type': 'Place', name: profile.location } } : {}),
     ...(currentJob ? { worksFor: { '@type': 'Organization', name: currentJob.company } } : {}),
     ...(schools.length > 0
-      ? { alumniOf: schools.map((name) => ({ '@type': 'CollegeOrUniversity', name })) }
+      ? { alumniOf: schools.map((name) => ({ '@type': 'EducationalOrganization', name })) }
       : {}),
   };
 }

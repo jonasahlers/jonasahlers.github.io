@@ -76,5 +76,5 @@ test('lists each school once', () => {
     },
     '',
   );
-  assert.deepEqual(data.alumniOf, [{ '@type': 'CollegeOrUniversity', name: 'Uni' }]);
+  assert.deepEqual(data.alumniOf, [{ '@type': 'EducationalOrganization', name: 'Uni' }]);
 });

@@ -6,21 +6,22 @@
   --text: #0b1220;
   --muted: #475569;
   --border: #dfe5ec;
-  --accent: #025f40;
-  --accent-soft: rgb(2 95 64 / 0.08);
-  --selection: rgb(2 95 64 / 0.18);
-  --spotlight: rgb(2 95 64 / 0.06);
-  --accent-2: #0e7490;
+  /* Steel blue, echoing the headings of the PDF CV, paired with indigo. */
+  --accent: #075985;
+  --accent-soft: rgb(7 89 133 / 0.08);
+  --selection: rgb(7 89 133 / 0.18);
+  --spotlight: rgb(7 89 133 / 0.06);
+  --accent-2: #4f46e5;
   --on-accent: #ffffff;
   /* Glow strength is capped so muted and accent text stay ≥4.5:1 even at its brightest point. */
-  --glow: rgb(2 95 64 / 0.13);
-  --glow-2: rgb(14 116 144 / 0.1);
+  --glow: rgb(7 89 133 / 0.13);
+  --glow-2: rgb(79 70 229 / 0.1);
   --dot: rgb(11 18 32 / 0.1);
   --card-shadow: 0 1px 2px rgb(11 18 32 / 0.04), 0 12px 32px -16px rgb(11 18 32 / 0.18);
   --radius: 0.5rem;
   --gutter: 1.5rem;
   /* Top padding shared by both desktop columns so the name and the first section line up. */
-  --page-top: clamp(3rem, 10vh, 6rem);
+  --page-top: clamp(2.5rem, 8vh, 6rem);
 }
 
 :root[data-theme='dark'] {
@@ -30,14 +31,14 @@
   --text: #e7ecf2;
   --muted: #93a1b0;
   --border: #1f2a36;
-  --accent: #6ee7b7;
-  --accent-soft: rgb(110 231 183 / 0.1);
-  --selection: rgb(110 231 183 / 0.25);
-  --spotlight: rgb(110 231 183 / 0.06);
-  --accent-2: #67e8f9;
+  --accent: #7dd3fc;
+  --accent-soft: rgb(125 211 252 / 0.1);
+  --selection: rgb(125 211 252 / 0.25);
+  --spotlight: rgb(125 211 252 / 0.06);
+  --accent-2: #a5b4fc;
   --on-accent: #0b0f14;
-  --glow: rgb(110 231 183 / 0.1);
-  --glow-2: rgb(103 232 249 / 0.07);
+  --glow: rgb(125 211 252 / 0.1);
+  --glow-2: rgb(165 180 252 / 0.08);
   --dot: rgb(231 236 242 / 0.07);
   --card-shadow: inset 0 1px 0 rgb(148 163 184 / 0.08);
 }

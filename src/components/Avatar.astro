@@ -20,15 +20,17 @@ const { name, photo } = Astro.props;
     display: grid;
     place-items: center;
     flex: none;
-    width: 4rem;
-    height: 4rem;
+    /* Slightly smaller on short screens so the pinned sidebar still fits. */
+    width: clamp(3rem, 7vh, 4rem);
+    height: clamp(3rem, 7vh, 4rem);
     overflow: hidden;
     border-radius: 1.125rem;
     background: linear-gradient(135deg, var(--accent), var(--accent-2));
     color: var(--on-accent);
-    font-size: 1.375rem;
-    font-weight: 700;
-    letter-spacing: -0.03em;
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 1.75rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
     box-shadow:
       inset 0 1px 0 rgb(255 255 255 / 0.25),
       0 12px 28px -14px var(--accent);
