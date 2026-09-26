@@ -20,8 +20,9 @@ function monthName(month: number): string {
   return MONTHS[month - 1]!;
 }
 
+// A no-break space keeps "Jun 2021" together when a narrow date column wraps.
 function label({ year, month }: ParsedDate): string {
-  return month === undefined ? `${year}` : `${monthName(month)} ${year}`;
+  return month === undefined ? `${year}` : `${monthName(month)} ${year}`;
 }
 
 /**

@@ -4,6 +4,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 export default defineConfig({
   // User site (repo "jonasahlers.github.io"), so no `base` path is needed.
   site: 'https://jonasahlers.github.io',
+  devToolbar: { enabled: false },
   fonts: [
     {
       provider: fontProviders.fontsource(),

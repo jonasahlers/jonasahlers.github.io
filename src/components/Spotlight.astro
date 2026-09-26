@@ -6,18 +6,15 @@
     '(hover: hover) and (pointer: fine) and (min-width: 1024px) and (prefers-reduced-motion: no-preference)',
   );
 
+  // Pointer events are already delivered at most once per frame, so this can update directly.
   if (spotlight) {
-    let frame = 0;
     window.addEventListener(
       'pointermove',
       (event) => {
         if (!enabled.matches) return;
-        cancelAnimationFrame(frame);
-        frame = requestAnimationFrame(() => {
-          spotlight.style.setProperty('--x', `${event.clientX}px`);
-          spotlight.style.setProperty('--y', `${event.clientY}px`);
-          spotlight.classList.add('is-active');
-        });
+        spotlight.style.setProperty('--x', `${event.clientX}px`);
+        spotlight.style.setProperty('--y', `${event.clientY}px`);
+        spotlight.classList.add('is-active');
       },
       { passive: true },
     );

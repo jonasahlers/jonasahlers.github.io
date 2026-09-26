@@ -47,40 +47,45 @@ const { profile, sections } = Astro.props;
 </header>
 
 <script>
-  // Scroll-spy: highlight the nav link of the section crossing the upper third of the viewport.
-  const links = new Map(
-    [...document.querySelectorAll<HTMLAnchorElement>('[data-section]')].map((link) => [link.dataset.section, link]),
-  );
+  // Scroll-spy: the active section is the last one whose top has passed 30% of the viewport,
+  // or the final section once the page is scrolled to the bottom (it may be too short to get there).
+  // A section picked from the nav stays active until the visitor scrolls by hand, since short
+  // sections near the end can't always scroll far enough to pass that line.
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('[data-section]')];
+  const sections = links.map((link) => document.getElementById(link.dataset.section ?? ''));
+  let picked: number | undefined;
 
-  function activate(id: string | undefined) {
-    for (const [sectionId, link] of links) {
-      if (sectionId === id) link.setAttribute('aria-current', 'true');
+  function highlight(active: number) {
+    links.forEach((link, index) => {
+      if (index === active) link.setAttribute('aria-current', 'true');
       else link.removeAttribute('aria-current');
-    }
+    });
   }
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) if (entry.isIntersecting) activate(entry.target.id);
-    },
-    { rootMargin: '-25% 0px -70% 0px' },
-  );
-
-  for (const id of links.keys()) {
-    const section = id ? document.getElementById(id) : null;
-    if (section) observer.observe(section);
+  function update() {
+    if (picked !== undefined) return highlight(picked);
+    const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    let active = 0;
+    sections.forEach((section, index) => {
+      if (section && section.getBoundingClientRect().top <= window.innerHeight * 0.3) active = index;
+    });
+    highlight(atBottom ? links.length - 1 : active);
   }
 
-  // The last section is often too short to reach the trigger line, so activate it at the bottom.
-  window.addEventListener(
-    'scroll',
-    () => {
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
-        activate([...links.keys()].at(-1));
-      }
-    },
-    { passive: true },
+  links.forEach((link, index) =>
+    link.addEventListener('click', () => {
+      picked = index;
+      update();
+    }),
   );
+  for (const type of ['wheel', 'touchstart', 'keydown'] as const) {
+    window.addEventListener(type, () => (picked = undefined), { passive: true });
+  }
+
+  // Browsers fire scroll and resize at most once per frame, so no extra throttling is needed.
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
 </script>
 
 <style>

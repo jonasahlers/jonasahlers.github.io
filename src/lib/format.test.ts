@@ -8,23 +8,23 @@ test('formats a range of years', () => {
 
 test('uses "Present" for an ongoing period', () => {
   assert.equal(formatPeriod('2023'), '2023 — Present');
-  assert.equal(formatPeriod('2023-04'), 'Apr 2023 — Present');
+  assert.equal(formatPeriod('2023-04'), 'Apr\u00a02023 — Present');
 });
 
-test('shows months when they are given', () => {
-  assert.equal(formatPeriod('2021-06', '2023-03'), 'Jun 2021 — Mar 2023');
+test('shows months when they are given, glued to their year', () => {
+  assert.equal(formatPeriod('2021-06', '2023-03'), 'Jun\u00a02021 — Mar\u00a02023');
 });
 
 test('collapses a period within one year', () => {
   assert.equal(formatPeriod('2022', '2022'), '2022');
-  assert.equal(formatPeriod('2022-06', '2022-08'), 'Jun — Aug 2022');
-  assert.equal(formatPeriod('2022-06', '2022-06'), 'Jun 2022');
+  assert.equal(formatPeriod('2022-06', '2022-08'), 'Jun — Aug\u00a02022');
+  assert.equal(formatPeriod('2022-06', '2022-06'), 'Jun\u00a02022');
   assert.equal(formatPeriod('2022-06', '2022'), '2022');
 });
 
 test('accepts a custom separator for screen-reader text', () => {
   assert.equal(formatPeriod('2021', '2023', ' to '), '2021 to 2023');
-  assert.equal(formatPeriod('2022-06', '2022-08', ' to '), 'Jun to Aug 2022');
+  assert.equal(formatPeriod('2022-06', '2022-08', ' to '), 'Jun to Aug\u00a02022');
 });
 
 test('rejects malformed dates with a helpful message', () => {
