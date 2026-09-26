@@ -179,3 +179,23 @@ worse).
 - **Display type:** the name is set in Instrument Serif (a single 400 weight, Latin subset, via the
   Fonts API), echoing the serif name on the CV. Everything else stays Inter.
 - **Structured data:** `alumniOf` uses `EducationalOrganization`, which also fits the gymnasium.
+
+## Iteration 4: warm "sunset" palette and a rising-sun pattern
+
+The owner asked to try the Color Hunt palette `#FFEDB9 #FFCB56 #FFA259 #FF7E7E` (cream, sunflower,
+orange, coral) and a different background pattern.
+
+- **Palette roles.** The four colors are too light to be text on a light page (1.2–2.5:1 on white),
+  so they are decorative in the light theme and text colors only where they pass:
+  - Light: cream page `#fff8ec`, warm text `#231a14`, muted `#6b5647`, text accent burnt orange
+    `#9a3412` (the palette's orange, deepened); tags on a 16% orange tint.
+  - Dark: warm near-black `#17120f`, text `#f7ede3`, muted `#b8a898`, accent the palette's own
+    orange `#ffa259`; coral stays decorative (it drops to 4.34:1 as tag text under the glow).
+  - The sunflower → orange → coral gradient (avatar, favicon, project covers) always carries dark
+    text `#231a14` (6.9–11.3:1).
+  - Every text pair passes 4.5:1 in both themes, including the glow peak (worst case 5.10:1 light,
+    5.17:1 dark).
+- **Pattern: a rising sun.** A warm sunflower/coral glow sits in the top-left corner, and faint
+  concentric rings radiate from the same point, fading out (CSS `repeating-radial-gradient` plus a
+  mask). A fine paper grain (inline SVG noise) covers the whole page. The dot grid is gone. All of
+  it stays behind the content; on phones the sun and rings scroll away with the header.
