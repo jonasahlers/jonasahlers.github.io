@@ -1,1 +1,9 @@
-<h1>Scaffold works</h1>
+---
+import { profile } from '../data/profile';
+import Base from '../layouts/Base.astro';
+import { personJsonLd } from '../lib/seo';
+---
+
+<Base title={`${profile.name} — ${profile.role}`} description={profile.tagline} jsonLd={personJsonLd(profile, Astro.site?.href ?? '')}>
+  <main id="content"><h1>{profile.name}</h1></main>
+</Base>
