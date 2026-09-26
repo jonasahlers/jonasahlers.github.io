@@ -19,7 +19,7 @@ const { jobs } = Astro.props;
         <Entry title={`${job.role} · ${job.company}`} href={job.href}>
           <Period slot="aside" start={job.start} end={job.end} />
           <p class="entry-text">{job.summary}</p>
-          {job.tech && <TagList tags={job.tech} />}
+          {job.tech && job.tech.length > 0 && <TagList tags={job.tech} />}
         </Entry>
       ))
     }

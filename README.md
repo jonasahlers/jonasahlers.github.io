@@ -13,12 +13,12 @@ date (`"2023"` or `"2023-04"`) fails the build and the live site stays on the la
 
 - Leave a list empty (for example `education: []`) to hide that section and its menu item.
 - Leave out `end` for your current job; it shows as "Present".
-- To show a project screenshot, put the image in `src/assets/` and set
-  `image: importedImage` on the project (`import shot from '../assets/shot.png'` at the top).
+- To show a project screenshot, put the image in `src/assets/`, import it at the top
+  (`import shot from '../assets/shot.png'`), and set `image: shot` on the project.
 
 ## Run it locally
 
-Requires Node 22.12 or newer (Node 24 LTS recommended).
+Requires Node 22.18 or newer (Node 24 LTS recommended); the tests run TypeScript directly.
 
 ```sh
 npm install

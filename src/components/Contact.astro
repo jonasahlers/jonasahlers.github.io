@@ -22,7 +22,7 @@ const { email, note, socials } = Astro.props;
     <button class="copy" type="button" data-copy={email} hidden>
       <span class="copy-icon"><Icon name="copy" size={16} /></span>
       <span class="check-icon"><Icon name="check" size={16} /></span>
-      <span data-copy-label>Copy</span>
+      <span data-copy-label>Copy</span><span class="sr-only"> email address</span>
     </button>
     <p class="sr-only" aria-live="polite" data-copy-status></p>
   </div>
@@ -53,14 +53,20 @@ const { email, note, socials } = Astro.props;
     button.hidden = false;
 
     let timer = 0;
+    const show = (text: string, message: string) => {
+      label.textContent = text;
+      // Clear first so screen readers announce the message again on a repeat click.
+      status.textContent = '';
+      window.setTimeout(() => (status.textContent = message), 50);
+    };
+
     button.addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(button.dataset.copy ?? '');
         button.dataset.copied = '';
-        label.textContent = 'Copied';
-        status.textContent = 'Email address copied';
+        show('Copied', 'Email address copied');
       } catch {
-        label.textContent = 'Copy failed';
+        show('Copy failed', 'Couldn’t copy the email address');
       }
       clearTimeout(timer);
       timer = window.setTimeout(() => {
@@ -98,7 +104,7 @@ const { email, note, socials } = Astro.props;
     transition: background-color 150ms ease;
   }
 
-  .email:hover {
+  .email:is(:hover, :focus-visible) {
     background: var(--accent);
   }
 
@@ -121,7 +127,7 @@ const { email, note, socials } = Astro.props;
     display: none;
   }
 
-  .copy:hover {
+  .copy:is(:hover, :focus-visible) {
     border-color: var(--muted);
   }
 

@@ -56,7 +56,7 @@ import Icon from './Icon.astro';
     display: none;
   }
 
-  .toggle:hover {
+  .toggle:is(:hover, :focus-visible) {
     border-color: var(--muted);
     color: var(--text);
   }

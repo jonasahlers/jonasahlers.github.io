@@ -42,20 +42,18 @@ const { title, href } = Astro.props;
     margin-top: 1rem;
   }
 
-  .aside:empty {
-    display: none;
-  }
-
   /* Every row keeps the aside column, even when it's empty (a project without a screenshot),
-     so all titles share one vertical axis. */
+     so all titles share one vertical axis. Stacked on phones, an empty aside is dropped. */
   @media (min-width: 640px) {
     .entry {
       grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
       gap: 1.5rem;
     }
+  }
 
+  @media (max-width: 639px) {
     .aside:empty {
-      display: block;
+      display: none;
     }
   }
 
@@ -138,11 +136,15 @@ const { title, href } = Astro.props;
     }
   }
 
-  /* While one entry is hovered, dim its siblings by color (never below 4.5:1 contrast). */
+  /* While one entry is hovered or keyboard-focused, dim its siblings by color (never below 4.5:1). */
   @media (hover: hover) and (pointer: fine) {
     :global(:has(> .entry:hover)) > .entry:not(:hover) .title {
       color: var(--muted);
     }
+  }
+
+  :global(:has(> .entry .title-link:focus-visible)) > .entry:not(:has(.title-link:focus-visible)) .title {
+    color: var(--muted);
   }
 
   .body :global(.entry-text) {

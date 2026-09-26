@@ -6,10 +6,10 @@
   --text: #0b1220;
   --muted: #526071;
   --border: #dfe5ec;
-  --accent: #047857;
-  --accent-soft: rgb(4 120 87 / 0.08);
-  --selection: rgb(4 120 87 / 0.18);
-  --spotlight: rgb(4 120 87 / 0.06);
+  --accent: #03704f;
+  --accent-soft: rgb(3 112 79 / 0.08);
+  --selection: rgb(3 112 79 / 0.18);
+  --spotlight: rgb(3 112 79 / 0.06);
   --card-shadow: 0 1px 2px rgb(11 18 32 / 0.04), 0 12px 32px -16px rgb(11 18 32 / 0.18);
   --radius: 0.5rem;
   --gutter: 1.5rem;
@@ -149,7 +149,7 @@ button {
     text-decoration-color 150ms ease;
 }
 
-.link:hover {
+.link:is(:hover, :focus-visible) {
   color: var(--accent);
   text-decoration-color: currentColor;
 }
@@ -158,7 +158,7 @@ button {
    The starting state only exists inside this media query, so content never hides without it. */
 @media (prefers-reduced-motion: no-preference) {
   .reveal {
-    animation: reveal 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation: reveal 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
     animation-delay: calc(var(--order, 0) * 90ms);
   }
 }

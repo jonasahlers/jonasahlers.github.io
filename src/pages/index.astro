@@ -9,17 +9,10 @@ import Skills from '../components/Skills.astro';
 import Spotlight from '../components/Spotlight.astro';
 import { profile } from '../data/profile';
 import Base from '../layouts/Base.astro';
+import { visibleSections } from '../lib/sections';
 import { personJsonLd } from '../lib/seo';
 
-// A section with no content is left out of both the page and the nav.
-const sections = [
-  profile.about.length > 0 && { id: 'about', label: 'About' },
-  profile.experience.length > 0 && { id: 'experience', label: 'Experience' },
-  profile.projects.length > 0 && { id: 'projects', label: 'Projects' },
-  profile.skills.length > 0 && { id: 'skills', label: 'Skills' },
-  profile.education.length > 0 && { id: 'education', label: 'Education' },
-  { id: 'contact', label: 'Contact' },
-].filter((section) => section !== false);
+const sections = visibleSections(profile);
 const has = (id: string) => sections.some((section) => section.id === id);
 const year = new Date().getFullYear();
 ---
@@ -32,17 +25,19 @@ const year = new Date().getFullYear();
   <Spotlight />
   <div class="page">
     <Sidebar profile={profile} sections={sections} />
-    <main id="content" class="reveal" style="--order: 2" tabindex="-1">
-      {has('about') && <About paragraphs={profile.about} />}
-      {has('experience') && <Experience jobs={profile.experience} />}
-      {has('projects') && <Projects projects={profile.projects} />}
-      {has('skills') && <Skills groups={profile.skills} />}
-      {has('education') && <Education entries={profile.education} />}
-      <Contact email={profile.email} note={profile.contactNote} socials={profile.socials} />
+    <div class="content reveal" style="--order: 2">
+      <main id="content" tabindex="-1">
+        {has('about') && <About paragraphs={profile.about} />}
+        {has('experience') && <Experience jobs={profile.experience} />}
+        {has('projects') && <Projects projects={profile.projects} />}
+        {has('skills') && <Skills groups={profile.skills} />}
+        {has('education') && <Education entries={profile.education} />}
+        <Contact email={profile.email} note={profile.contactNote} socials={profile.socials} />
+      </main>
       <footer class="colophon">
         <p>© {year} {profile.name}. Built with <a class="link" href="https://astro.build" target="_blank" rel="noreferrer">Astro<span class="sr-only"> (opens in a new tab)</span></a> and hosted on GitHub Pages.</p>
       </footer>
-    </main>
+    </div>
   </div>
 </Base>
 
@@ -53,8 +48,8 @@ const year = new Date().getFullYear();
     padding-inline: var(--gutter);
   }
 
-  main {
-    padding-block: 2rem 0;
+  .content {
+    padding-top: 2rem;
   }
 
   main:focus {
@@ -68,9 +63,9 @@ const year = new Date().getFullYear();
       gap: 1rem;
     }
 
-    main {
+    .content {
       width: 52%;
-      padding-block: var(--page-top) 0;
+      padding-top: var(--page-top);
     }
   }
 

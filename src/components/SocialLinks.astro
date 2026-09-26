@@ -44,7 +44,7 @@ const { links, email } = Astro.props;
     transition: color 150ms ease;
   }
 
-  .social:hover {
+  .social:is(:hover, :focus-visible) {
     color: var(--text);
   }
 </style>
