@@ -1,0 +1,23 @@
+---
+import Section from './Section.astro';
+
+interface Props {
+  paragraphs: string[];
+}
+
+const { paragraphs } = Astro.props;
+---
+
+<Section id="about" label="About">
+  <div class="about">
+    {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+  </div>
+</Section>
+
+<style>
+  .about {
+    display: grid;
+    gap: 1rem;
+    text-wrap: pretty;
+  }
+</style>

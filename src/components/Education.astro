@@ -1,0 +1,25 @@
+---
+import type { Education as EducationEntry } from '../data/types';
+import Entry from './Entry.astro';
+import Period from './Period.astro';
+import Section from './Section.astro';
+
+interface Props {
+  entries: EducationEntry[];
+}
+
+const { entries } = Astro.props;
+---
+
+<Section id="education" label="Education">
+  <ol role="list">
+    {
+      entries.map((entry) => (
+        <Entry title={`${entry.degree} · ${entry.school}`} href={entry.href}>
+          <Period slot="aside" start={entry.start} end={entry.end} />
+          {entry.details && <p class="entry-text">{entry.details}</p>}
+        </Entry>
+      ))
+    }
+  </ol>
+</Section>

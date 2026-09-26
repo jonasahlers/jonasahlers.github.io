@@ -1,0 +1,27 @@
+---
+import type { Job } from '../data/types';
+import Entry from './Entry.astro';
+import Period from './Period.astro';
+import Section from './Section.astro';
+import TagList from './TagList.astro';
+
+interface Props {
+  jobs: Job[];
+}
+
+const { jobs } = Astro.props;
+---
+
+<Section id="experience" label="Experience">
+  <ol role="list">
+    {
+      jobs.map((job) => (
+        <Entry title={`${job.role} · ${job.company}`} href={job.href}>
+          <Period slot="aside" start={job.start} end={job.end} />
+          <p class="entry-text">{job.summary}</p>
+          {job.tech && <TagList tags={job.tech} />}
+        </Entry>
+      ))
+    }
+  </ol>
+</Section>

@@ -1,5 +1,11 @@
 ---
+import About from '../components/About.astro';
+import Contact from '../components/Contact.astro';
+import Education from '../components/Education.astro';
+import Experience from '../components/Experience.astro';
+import Projects from '../components/Projects.astro';
 import Sidebar from '../components/Sidebar.astro';
+import Skills from '../components/Skills.astro';
 import Spotlight from '../components/Spotlight.astro';
 import { profile } from '../data/profile';
 import Base from '../layouts/Base.astro';
@@ -14,6 +20,8 @@ const sections = [
   profile.education.length > 0 && { id: 'education', label: 'Education' },
   { id: 'contact', label: 'Contact' },
 ].filter((section) => section !== false);
+const has = (id: string) => sections.some((section) => section.id === id);
+const year = new Date().getFullYear();
 ---
 
 <Base
@@ -25,7 +33,15 @@ const sections = [
   <div class="page">
     <Sidebar profile={profile} sections={sections} />
     <main id="content" tabindex="-1">
-      <p>Sections arrive in the next task.</p>
+      {has('about') && <About paragraphs={profile.about} />}
+      {has('experience') && <Experience jobs={profile.experience} />}
+      {has('projects') && <Projects projects={profile.projects} />}
+      {has('skills') && <Skills groups={profile.skills} />}
+      {has('education') && <Education entries={profile.education} />}
+      <Contact email={profile.email} note={profile.contactNote} socials={profile.socials} />
+      <footer class="colophon">
+        <p>© {year} {profile.name}. Built with <a class="link" href="https://astro.build" target="_blank" rel="noreferrer">Astro<span class="sr-only"> (opens in a new tab)</span></a> and hosted on GitHub Pages.</p>
+      </footer>
     </main>
   </div>
 </Base>
@@ -56,5 +72,11 @@ const sections = [
       width: 52%;
       padding-block: 6rem 0;
     }
+  }
+
+  .colophon {
+    max-width: 28rem;
+    padding-bottom: 4rem;
+    font-size: 0.875rem;
   }
 </style>

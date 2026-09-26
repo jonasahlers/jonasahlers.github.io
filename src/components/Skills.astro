@@ -1,0 +1,54 @@
+---
+import type { SkillGroup } from '../data/types';
+import Section from './Section.astro';
+import TagList from './TagList.astro';
+
+interface Props {
+  groups: SkillGroup[];
+}
+
+const { groups } = Astro.props;
+---
+
+<Section id="skills" label="Skills">
+  <dl class="skills">
+    {
+      groups.map(({ label, items }) => (
+        <div class="group">
+          <dt class="label">{label}</dt>
+          <dd>
+            <TagList tags={items} label={label} />
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+</Section>
+
+<style>
+  .skills {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .group {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .group {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+      gap: 1.5rem;
+      align-items: baseline;
+    }
+  }
+
+  .label {
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+</style>

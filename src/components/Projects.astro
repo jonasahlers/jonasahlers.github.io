@@ -1,0 +1,73 @@
+---
+import { Image } from 'astro:assets';
+import type { Project } from '../data/types';
+import Entry from './Entry.astro';
+import Icon from './Icon.astro';
+import Section from './Section.astro';
+import TagList from './TagList.astro';
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+---
+
+<Section id="projects" label="Projects">
+  <ol role="list">
+    {
+      projects.map((project) => (
+        <Entry title={project.name} href={project.href ?? project.repo}>
+          {project.image && (
+            <div slot="aside" class="thumb">
+              <Image src={project.image} alt="" width={320} />
+            </div>
+          )}
+          <p class="entry-text">{project.description}</p>
+          {project.href && project.repo && (
+            <a class="source" href={project.repo} target="_blank" rel="noreferrer">
+              <Icon name="github" size={16} />
+              Source code
+              <span class="sr-only"> (opens in a new tab)</span>
+            </a>
+          )}
+          {project.tech && <TagList tags={project.tech} />}
+        </Entry>
+      ))
+    }
+  </ol>
+</Section>
+
+<style>
+  .thumb :global(img) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border: 2px solid var(--border);
+    border-radius: 0.25rem;
+    transition: border-color 150ms ease;
+  }
+
+  :global(.entry:hover) .thumb :global(img) {
+    border-color: var(--muted);
+  }
+
+  /* Sits above the entry's stretched title link so it stays separately clickable. */
+  .source {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    margin-top: 0.75rem;
+    color: var(--text);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 150ms ease;
+  }
+
+  .source:hover {
+    color: var(--accent);
+  }
+</style>
