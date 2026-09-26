@@ -16,14 +16,14 @@ export default defineConfig({
       fallbacks: ['system-ui', 'sans-serif'],
     },
     {
-      // Display serif for the name, echoing the serif name on the PDF CV.
+      // Display face for the name, monogram, About lede, and project initials.
       provider: fontProviders.fontsource(),
-      name: 'Instrument Serif',
+      name: 'Plus Jakarta Sans',
       cssVariable: '--font-display',
-      weights: [400],
+      weights: [500, 800],
       styles: ['normal'],
       subsets: ['latin'],
-      fallbacks: ['Georgia', 'serif'],
+      fallbacks: ['system-ui', 'sans-serif'],
     },
   ],
 });

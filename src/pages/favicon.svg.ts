@@ -3,8 +3,8 @@ import { profile } from '../data/profile';
 import { initials } from '../lib/format';
 
 // A monogram favicon, generated from the profile name at build time. It mirrors the avatar:
-// the sunflower → orange → coral gradient with dark serif initials (favicons can't load web
-// fonts, so Georgia stands in for the display serif).
+// the sunflower → orange → coral gradient with dark initials (favicons can't load web fonts,
+// so the system sans stands in for the display face).
 export const GET: APIRoute = () => {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <defs>
@@ -15,7 +15,7 @@ export const GET: APIRoute = () => {
     </linearGradient>
   </defs>
   <rect width="64" height="64" rx="18" fill="url(#g)"/>
-  <text x="32" y="42" text-anchor="middle" font-family="'Instrument Serif', Georgia, 'Times New Roman', serif" font-size="30" font-weight="400" letter-spacing="-0.5" fill="#231a14">${initials(profile.name)}</text>
+  <text x="32" y="42" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="26" font-weight="800" letter-spacing="-1" fill="#231a14">${initials(profile.name)}</text>
 </svg>`;
   return new Response(svg, { headers: { 'Content-Type': 'image/svg+xml' } });
 };

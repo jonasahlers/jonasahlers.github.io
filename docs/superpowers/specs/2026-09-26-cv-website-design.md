@@ -199,3 +199,11 @@ orange, coral) and a different background pattern.
   concentric rings radiate from the same point, fading out (CSS `repeating-radial-gradient` plus a
   mask). A fine paper grain (inline SVG noise) covers the whole page. The dot grid is gone. All of
   it stays behind the content; on phones the sun and rings scroll away with the header.
+
+## Iteration 5: display font
+
+The owner found Instrument Serif (condensed display serif) "weird". Candidates were compared in
+place on the page: Plus Jakarta Sans, Sora (too wide and stiff), Bricolage Grotesque (quirky),
+Fraunces (still a serif), and Outfit (generic). **Plus Jakarta Sans** replaces it: 800 for the
+name, monogram, and project initials; 500 for the About lede (two static Latin files, 24 KB total).
+Body text stays Inter.
