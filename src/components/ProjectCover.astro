@@ -24,7 +24,7 @@ const pattern = PATTERNS[index % PATTERNS.length];
     aspect-ratio: 16 / 10;
     border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--border));
     border-radius: 0.5rem;
-    background-color: color-mix(in srgb, var(--accent) 6%, var(--surface));
+    background-color: var(--surface);
     transition: border-color 150ms ease;
   }
 
@@ -35,24 +35,26 @@ const pattern = PATTERNS[index % PATTERNS.length];
     }
   }
 
+  /* Each pattern sits on the theme's soft sunset wash (--cover). */
   .dots {
-    background-image: radial-gradient(var(--ink) 1.2px, transparent 1.5px);
-    background-size: 12px 12px;
+    background-image: radial-gradient(var(--ink) 1.2px, transparent 1.5px), var(--cover);
+    background-size: 12px 12px, auto;
   }
 
   .lines {
-    background-image: repeating-linear-gradient(135deg, var(--ink) 0 1px, transparent 1px 9px);
+    background-image: repeating-linear-gradient(135deg, var(--ink) 0 1px, transparent 1px 9px), var(--cover);
   }
 
   .grid {
     background-image:
       linear-gradient(var(--ink) 1px, transparent 1px),
-      linear-gradient(90deg, var(--ink) 1px, transparent 1px);
-    background-size: 14px 14px;
+      linear-gradient(90deg, var(--ink) 1px, transparent 1px),
+      var(--cover);
+    background-size: 14px 14px, 14px 14px, auto;
   }
 
   .rings {
-    background-image: repeating-radial-gradient(circle at 100% 100%, var(--ink) 0 1px, transparent 1px 10px);
+    background-image: repeating-radial-gradient(circle at 100% 100%, var(--ink) 0 1px, transparent 1px 10px), var(--cover);
   }
 
   .initial {
