@@ -2,11 +2,18 @@ import type { APIRoute } from 'astro';
 import { profile } from '../data/profile';
 import { initials } from '../lib/format';
 
-// A monogram favicon, generated from the profile name at build time.
+// A monogram favicon, generated from the profile name at build time. It mirrors the avatar:
+// the light theme's --accent → --accent-2 gradient with white initials.
 export const GET: APIRoute = () => {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#0b1220"/>
-  <text x="32" y="42" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="27" font-weight="700" letter-spacing="-1" fill="#6ee7b7">${initials(profile.name)}</text>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#025f40"/>
+      <stop offset="1" stop-color="#0e7490"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="url(#g)"/>
+  <text x="32" y="42" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="26" font-weight="700" letter-spacing="-1" fill="#ffffff">${initials(profile.name)}</text>
 </svg>`;
   return new Response(svg, { headers: { 'Content-Type': 'image/svg+xml' } });
 };

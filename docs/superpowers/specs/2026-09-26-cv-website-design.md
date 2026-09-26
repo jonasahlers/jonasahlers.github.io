@@ -59,9 +59,9 @@ Inter (variable, Latin subset) self-hosted via Astro's Fonts API. Tabular figure
 | `--bg` | `#f7f9fb` | `#0b0f14` |
 | `--surface` | `#ffffff` | `#131922` |
 | `--text` | `#0b1220` | `#e7ecf2` |
-| `--muted` | `#526071` | `#93a1b0` |
+| `--muted` | `#475569` | `#93a1b0` |
 | `--border` | `#dfe5ec` | `#1f2a36` |
-| `--accent` | `#03704f` | `#6ee7b7` |
+| `--accent` | `#025f40` | `#6ee7b7` |
 
 The accent is a single token per theme; its final hue is tuned during visual iteration, but any
 replacement must keep ≥4.5:1 against `--bg` and `--surface`. Type scale: name 48/52 (mobile 36/40),
@@ -160,5 +160,7 @@ worse).
   phones where the column stacks.
 - **Contact:** the section becomes a closing card (surface, border, corner glow) with the note set
   larger.
+- **Contrast under the glow:** light `--muted` and `--accent` were darkened (to `#475569` and
+  `#025f40`) and the glow capped at 13% / 10%, so text passes 4.5:1 even at the glow's peak.
 - **Constraints kept:** no new dependencies, no JavaScript needed for any content, ≥4.5:1 text
   contrast in both themes, every hover with a focus twin, motion gated by reduced motion.

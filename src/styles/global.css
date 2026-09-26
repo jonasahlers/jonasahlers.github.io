@@ -4,16 +4,17 @@
   --bg: #f7f9fb;
   --surface: #ffffff;
   --text: #0b1220;
-  --muted: #526071;
+  --muted: #475569;
   --border: #dfe5ec;
-  --accent: #03704f;
-  --accent-soft: rgb(3 112 79 / 0.08);
-  --selection: rgb(3 112 79 / 0.18);
-  --spotlight: rgb(3 112 79 / 0.06);
+  --accent: #025f40;
+  --accent-soft: rgb(2 95 64 / 0.08);
+  --selection: rgb(2 95 64 / 0.18);
+  --spotlight: rgb(2 95 64 / 0.06);
   --accent-2: #0e7490;
   --on-accent: #ffffff;
-  --glow: rgb(3 112 79 / 0.16);
-  --glow-2: rgb(14 116 144 / 0.12);
+  /* Glow strength is capped so muted and accent text stay ≥4.5:1 even at its brightest point. */
+  --glow: rgb(2 95 64 / 0.13);
+  --glow-2: rgb(14 116 144 / 0.1);
   --dot: rgb(11 18 32 / 0.1);
   --card-shadow: 0 1px 2px rgb(11 18 32 / 0.04), 0 12px 32px -16px rgb(11 18 32 / 0.18);
   --radius: 0.5rem;
