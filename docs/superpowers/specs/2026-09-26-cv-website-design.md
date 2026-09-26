@@ -207,3 +207,19 @@ place on the page: Plus Jakarta Sans, Sora (too wide and stiff), Bricolage Grote
 Fraunces (still a serif), and Outfit (generic). **Plus Jakarta Sans** replaces it: 800 for the
 name, monogram, and project initials; 500 for the About lede (two static Latin files, 24 KB total).
 Body text stays Inter.
+
+## Iteration 6: Danish/English, Danish by default
+
+- **Routing:** two static pages via Astro's i18n config (`defaultLocale: 'da'`, no prefix for
+  the default): Danish at `/`, English at `/en/`. Each page sets `<html lang>`, a canonical URL,
+  `og:locale`, and `hreflang` alternates (`x-default` → Danish). No JavaScript is needed to read
+  either language.
+- **Toggle:** a `DA | EN` segmented control beside the theme toggle; plain links (`hreflang`,
+  `lang`, `aria-current="page"`). A tiny script keeps the visitor on the same section when
+  switching.
+- **Content:** `profile.ts` is typed `Localized<Profile>`: any string may be a `{ da, en }` pair,
+  and plain strings are shared (names, URLs, dates, most tech tags). `localize(profile, locale)`
+  resolves it to a plain `Profile`, so components are unchanged. Unit-tested.
+- **UI strings:** one dictionary (`src/i18n/ui.ts`); the Danish table is typed against the English
+  keys, so a missing translation fails the build. `formatPeriod` takes a locale (Danish month
+  abbreviations, "nu" for present, "til" in screen-reader text).
