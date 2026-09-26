@@ -1,0 +1,149 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  title: string;
+  /** Makes the whole entry a link. */
+  href?: string;
+}
+
+const { title, href } = Astro.props;
+const hasAside = Astro.slots.has('aside');
+---
+
+<li class:list={['entry', { 'has-aside': hasAside }]}>
+  {hasAside && <div class="aside"><slot name="aside" /></div>}
+  <div class="body">
+    <h3 class="title">
+      {
+        href ? (
+          <a class="title-link" href={href} target="_blank" rel="noreferrer">
+            {title}&nbsp;<Icon name="arrow-up-right" size={14} class="arrow" />
+            <span class="sr-only"> (opens in a new tab)</span>
+          </a>
+        ) : (
+          title
+        )
+      }
+    </h3>
+    <slot />
+  </div>
+</li>
+
+<style>
+  .entry {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    gap: 0.5rem;
+    padding-block: 1rem;
+  }
+
+  .entry + .entry {
+    margin-top: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .entry.has-aside {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+      gap: 1.5rem;
+    }
+  }
+
+  /* Hover surface: extends past the text edge so the text never moves. */
+  .entry::before {
+    content: '';
+    position: absolute;
+    inset: 0 -1rem;
+    z-index: -1;
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--card-shadow);
+    opacity: 0;
+    transition: opacity 150ms ease;
+  }
+
+  .entry:focus-within::before {
+    opacity: 1;
+  }
+
+  @media (hover: hover) {
+    .entry:hover::before {
+      opacity: 1;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .entry::before,
+    .title-link::after {
+      inset-inline: -1.5rem;
+    }
+  }
+
+  .title {
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.4;
+    transition: color 150ms ease;
+  }
+
+  /* The title link stretches over the whole card. */
+  .title-link::after {
+    content: '';
+    position: absolute;
+    inset: 0 -1rem;
+    border-radius: var(--radius);
+  }
+
+  .title-link:focus-visible {
+    outline: none;
+  }
+
+  .title-link:focus-visible::after {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .title-link :global(.arrow) {
+    display: inline-block;
+    vertical-align: -0.1em;
+    transition: transform 150ms ease;
+  }
+
+  .entry:has(.title-link:focus-visible) .title {
+    color: var(--accent);
+  }
+
+  .title-link:focus-visible :global(.arrow) {
+    transform: translate(2px, -2px);
+  }
+
+  @media (hover: hover) {
+    .entry:has(.title-link):hover .title {
+      color: var(--accent);
+    }
+
+    .entry:hover .title-link :global(.arrow) {
+      transform: translate(2px, -2px);
+    }
+  }
+
+  /* While one entry is hovered, dim its siblings by color (never below 4.5:1 contrast). */
+  @media (hover: hover) and (pointer: fine) {
+    :global(:has(> .entry:hover)) > .entry:not(:hover) .title {
+      color: var(--muted);
+    }
+  }
+
+  .body :global(.entry-text) {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .body :global(.tags) {
+    margin-top: 1rem;
+  }
+</style>

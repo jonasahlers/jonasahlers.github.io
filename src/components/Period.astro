@@ -1,0 +1,29 @@
+---
+import type { YearMonth } from '../data/types';
+import { formatPeriod } from '../lib/format';
+
+interface Props {
+  start: YearMonth;
+  end?: YearMonth;
+}
+
+const { start, end } = Astro.props;
+---
+
+<p class="period">
+  <span aria-hidden="true">{formatPeriod(start, end)}</span>
+  <span class="sr-only">{formatPeriod(start, end, ' to ')}</span>
+</p>
+
+<style>
+  .period {
+    padding-top: 0.125rem;
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+</style>

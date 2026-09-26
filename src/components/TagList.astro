@@ -1,0 +1,30 @@
+---
+interface Props {
+  tags: string[];
+  label?: string;
+}
+
+const { tags, label = 'Technologies' } = Astro.props;
+---
+
+<ul class="tags" role="list" aria-label={label}>
+  {tags.map((tag) => <li class="tag">{tag}</li>)}
+</ul>
+
+<style>
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+  }
+</style>

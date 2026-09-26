@@ -1,0 +1,53 @@
+---
+interface Props {
+  id: string;
+  label: string;
+}
+
+const { id, label } = Astro.props;
+---
+
+<section id={id} class="section" aria-labelledby={`${id}-heading`}>
+  <h2 id={`${id}-heading`} class="heading">{label}</h2>
+  <slot />
+</section>
+
+<style>
+  .section {
+    margin-bottom: 6rem;
+  }
+
+  /* Mobile: a sticky, translucent label bar per section. */
+  .heading {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    margin: 0 calc(var(--gutter) * -1) 1rem;
+    padding: 1.25rem var(--gutter);
+    background: color-mix(in srgb, var(--bg) 80%, transparent);
+    backdrop-filter: blur(8px);
+    color: var(--text);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* Desktop: the sidebar nav names the sections, so headings stay for screen readers only. */
+  @media (min-width: 1024px) {
+    .section {
+      margin-bottom: 9rem;
+    }
+
+    .heading {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+  }
+</style>
