@@ -104,14 +104,11 @@ export default defineConfig({
 
 ```json
 {
-  "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"],
-  "compilerOptions": {
-    "allowImportingTsExtensions": true
-  }
+  "extends": "astro/tsconfigs/strict"
 }
 ```
+
+(Astro's base config already sets `allowImportingTsExtensions`, `noEmit`, and the include/exclude paths, which the `.ts`-extension import in the tests relies on.)
 
 - [ ] **Step 5: Write a temporary `src/pages/index.astro`**
 
