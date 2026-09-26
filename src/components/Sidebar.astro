@@ -288,4 +288,20 @@ const t = useTranslations(Astro.currentLocale);
     align-items: center;
     gap: 0.5rem;
   }
+
+  /* Short laptop screens (1366×768 minus browser chrome): a tighter nav keeps the social links
+     and switches in view while the sidebar is pinned. */
+  @media (min-width: 1024px) and (max-height: 720px) {
+    .nav {
+      margin-top: 1.25rem;
+    }
+
+    .nav-link {
+      padding-block: 0.25rem;
+    }
+
+    .footer {
+      margin-top: 1rem;
+    }
+  }
 </style>

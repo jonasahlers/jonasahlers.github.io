@@ -9,18 +9,18 @@ export const profile: Localized<Profile> = {
   name: 'Jonas Ahlers',
   role: { da: 'Softwareudvikler', en: 'Software Developer' },
   tagline: {
-    da: 'Kandidatstuderende i datalogi ved Aarhus Universitet og studenterprogrammør hos hummel.',
-    en: 'Computer science master’s student at Aarhus University and student programmer at hummel.',
+    da: 'Junior integrationsudvikler hos hummel med en kandidatgrad i datalogi fra Aarhus Universitet.',
+    en: 'Junior Integration Developer at hummel, with an MSc in Computer Science from Aarhus University.',
   },
   location: { da: 'Aarhus, Danmark', en: 'Aarhus, Denmark' },
   about: [
     {
-      da: 'Jeg læser en kandidat i datalogi ved Aarhus Universitet med specialisering i dataintensive systemer og kryptologi.',
-      en: 'I’m a master’s student in computer science at Aarhus University, specializing in data-intensive systems and cryptology.',
+      da: 'Jeg er junior integrationsudvikler hos hummel i Aarhus, hvor jeg bygger og vedligeholder de integrationer, der forbinder vores systemer og samarbejdspartnere.',
+      en: 'I’m a Junior Integration Developer at hummel in Aarhus, building and maintaining the integrations that connect our systems and partners.',
     },
     {
-      da: 'Ved siden af studiet arbejder jeg som studenterprogrammør i hummels IT Business Central-udviklingsteam, hvor jeg udvikler og vedligeholder løsninger i Microsoft Business Central.',
-      en: 'Alongside my studies I work as a student programmer on hummel’s IT Business Central development team, where I develop and maintain solutions using Microsoft Business Central.',
+      da: 'Jeg har en kandidatgrad i datalogi fra Aarhus Universitet med specialisering i dataintensive systemer og kryptologi. I mit speciale implementerede vi LEAST, et foreslået post-kvante threshold-signaturskema.',
+      en: 'I hold an MSc in Computer Science from Aarhus University, specializing in data-intensive systems and cryptology. For my master’s thesis we implemented LEAST, a proposed post-quantum threshold signature scheme.',
     },
     {
       da: 'I mit bachelorprojekt gjorde jeg single-source shortest path hurtigere på GPU’en: en parallel implementering i CUDA, der i benchmarks mod CPU-baserede versioner gav en markant speedup.',
@@ -34,32 +34,68 @@ export const profile: Localized<Profile> = {
   },
   socials: [
     { label: 'GitHub', href: 'https://github.com/jonasahlers', icon: 'github' },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jonas-ahlers-185274250/', icon: 'linkedin' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jonas-ahlers1/', icon: 'linkedin' },
   ],
   experience: [
     {
-      role: { da: 'Studenterprogrammør', en: 'Student Programmer' },
+      role: { da: 'Junior integrationsudvikler', en: 'Junior Integration Developer' },
       company: 'hummel',
       href: 'https://hummel.net',
-      start: '2023',
+      start: '2026-08',
       summary: {
-        da: 'En del af hummels IT Business Central-udviklingsteam: jeg udvikler og vedligeholder løsninger i Microsoft Business Central.',
-        en: 'Part of hummel’s IT Business Central development team: I develop and maintain solutions using Microsoft Business Central.',
+        da: 'Fuldtid. Jeg bygger og vedligeholder de integrationer, der forbinder hummels systemer og samarbejdspartnere.',
+        en: 'Full-time. I build and maintain the integrations that connect hummel’s systems and partners.',
       },
-      tech: ['Microsoft Business Central'],
+    },
+    {
+      role: {
+        da: 'Studentermedhjælper, BC-udvikling og integration',
+        en: 'Student Worker, BC Development and Integration',
+      },
+      company: 'hummel',
+      href: 'https://hummel.net',
+      start: '2023-04',
+      end: '2026-08',
+      summary: {
+        da: 'Deltid ved siden af studiet i hummels IT-udviklingsteam: udvikling og vedligeholdelse af løsninger i Microsoft Business Central samt integrationsudvikling.',
+        en: 'Part-time alongside my studies on hummel’s IT development team: developing and maintaining Microsoft Business Central solutions, plus integration development.',
+      },
+      tech: ['Microsoft Business Central', 'Dynamics NAV', '.NET'],
     },
     {
       role: { da: 'Hotelmedarbejder', en: 'Hotel Staff' },
       company: 'Danski / Skinetworks',
-      start: '2020',
-      end: '2020',
+      start: '2019-12',
+      end: '2020-03',
       summary: {
         da: 'En vintersæson i Alpe d’Huez, Frankrig: kundeservice og mange forskellige opgaver på hotellet.',
         en: 'A winter season in Alpe d’Huez, France: customer service and a wide range of tasks within the hotel.',
       },
     },
+    {
+      role: { da: 'Rengøringsassistent', en: 'Cleaning Assistant' },
+      company: 'Demenscentrum',
+      start: '2018-07',
+      end: '2019-12',
+      summary: {
+        da: 'Deltidsjob med rengøring på et demenscenter i Aarhus.',
+        en: 'Part-time cleaning job at a dementia care centre in Aarhus.',
+      },
+    },
   ],
   projects: [
+    {
+      name: { da: 'Post-kvante threshold-signaturer (LEAST)', en: 'Post-quantum threshold signatures (LEAST)' },
+      description: {
+        da: 'Speciale (2026) med to medstuderende, vejledt af Diego F. Aranha: en implementering af LEAST, et foreslået kodebaseret threshold-signaturskema, der er indsendt til NISTs call for multi-party threshold-skemaer. Det deler en LESS-signeringsnøgle mellem N parter, så hvilke som helst T af dem kan signere sammen, med aktiv sikkerhed mod en uærlig majoritet.',
+        en: 'Master’s thesis (2026) with two fellow students, supervised by Diego F. Aranha: an implementation of LEAST, a proposed code-based threshold signature scheme submitted to NIST’s call for multi-party threshold schemes. It splits a LESS signing key among N parties so that any T of them can sign together, with active security against a dishonest majority.',
+      },
+      tech: [
+        { da: 'Post-kvante-kryptografi', en: 'Post-quantum cryptography' },
+        { da: 'Threshold-signaturer', en: 'Threshold signatures' },
+        'MPC',
+      ],
+    },
     {
       name: { da: 'GPU-accelererede korteste veje', en: 'GPU-accelerated shortest paths' },
       description: {
@@ -101,9 +137,10 @@ export const profile: Localized<Profile> = {
       school: { da: 'Aarhus Universitet', en: 'Aarhus University' },
       href: 'https://www.au.dk',
       start: '2024',
+      end: '2026',
       details: {
-        da: 'Specialisering i dataintensive systemer og kryptologi.',
-        en: 'Specializing in data-intensive systems and cryptology.',
+        da: 'Specialisering i dataintensive systemer og kryptologi. Speciale: Post Quantum Threshold Digital Signature Scheme with LEAST.',
+        en: 'Specialized in data-intensive systems and cryptology. Master’s thesis: Post Quantum Threshold Digital Signature Scheme with LEAST.',
       },
     },
     {
@@ -122,6 +159,33 @@ export const profile: Localized<Profile> = {
       school: 'Risskov Gymnasium',
       start: '2016',
       end: '2019',
+    },
+  ],
+  references: [
+    {
+      title: 'Studerende fandt sikkerhedshuller i Nettos app',
+      titleLang: 'da',
+      source: {
+        da: 'Aktuel Naturvidenskab nr. 3/2026, s. 22–23',
+        en: 'Aktuel Naturvidenskab no. 3/2026, pp. 22–23',
+      },
+      date: '2026',
+      href: 'https://aktuelnaturvidenskab.dk/find-artikel/nyeste-numre/3-2026/studerende-fandt-sikkerhedshuller-i-nettos-app',
+      summary: {
+        da: 'Artikel af Henriette Stevnhøj om, hvordan jeg (nævnt som Jonas Ahlers Nielsen) og to medstuderende fandt sikkerhedshuller i Nettos betalingsapp i kurset Systems Security. Salling Group rettede fejlene kort efter.',
+        en: 'Feature by Henriette Stevnhøj on how two fellow students and I (named as Jonas Ahlers Nielsen) found security flaws in Netto’s payment app in the Systems Security course. Salling Group fixed them shortly after.',
+      },
+    },
+    {
+      title: 'Systems Security Hall of Fame',
+      titleLang: 'en',
+      source: { da: 'Diego F. Aranha, Aarhus Universitet', en: 'Diego F. Aranha, Aarhus University' },
+      date: '2026',
+      href: 'https://dfaranha.github.io/post/syssec-hof/',
+      summary: {
+        da: 'Samme analyse kom med i 2025-udgaven af kursets Hall of Fame, som fremhæver ansvarlige offentliggørelser, der har ført til rettelser i rigtige systemer.',
+        en: 'The same analysis made the course’s 2025 Hall of Fame, which highlights coordinated disclosures that led to fixes in real systems.',
+      },
     },
   ],
 };

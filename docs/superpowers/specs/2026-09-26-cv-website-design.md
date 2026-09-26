@@ -224,3 +224,21 @@ Body text stays Inter.
 - **UI strings:** one dictionary (`src/i18n/ui.ts`); the Danish table is typed against the English
   keys, so a missing translation fails the build. `formatPeriod` takes a locale (Danish month
   abbreviations, "nu" for present, "til" in screen-reader text).
+
+## Iteration 7: references, new job, master's thesis
+
+- **Content from LinkedIn** (profile PDF, Sept 2026): Junior Integration Developer at hummel
+  (full-time, Aug 2026–), the student role before it (Apr 2023–Aug 2026), month-precise dates for
+  the ski season (Dec 2019–Mar 2020), and a part-time job at Demenscentrum (Jul 2018–Dec 2019).
+  The LinkedIn URL moved to `/in/jonas-ahlers1/`. The MSc now ends 2026.
+- **Master's thesis**, shown the way the bachelor project is: named in the Education entry, a
+  Projects entry, and a sentence in About. Title and description come from the thesis draft
+  (LEAST, a code-based threshold signature scheme built on LESS); no language or results are
+  claimed, since the draft's implementation chapter is empty.
+- **References section** (between Skills and Contact): a `Reference` type (title, source, date,
+  link, summary, and `titleLang`, so a Danish headline is announced in Danish on `/en/`).
+  Entries: the Aktuel Naturvidenskab 3/2026 article (pp. 22–23) and the Systems Security Hall of
+  Fame. A single date reuses `Period` (`formatPeriod` collapses equal start and end).
+- **Sidebar:** the seventh nav item pushed the footer below the fold at 1366×650. Below 720px
+  window height the nav tightens (smaller gaps and link padding); the footer now fits at every
+  pinned height (641–720px has 5–48px spare).

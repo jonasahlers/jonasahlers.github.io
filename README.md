@@ -1,6 +1,6 @@
 # jonasahlers.github.io
 
-My personal CV site: a single page with my experience, projects, skills, education, and contact
+My personal CV site: a single page with my experience, projects, skills, education, references, and contact
 details. Built with [Astro](https://astro.build), deployed to GitHub Pages on every push to `main`.
 
 **Live:** https://jonasahlers.github.io

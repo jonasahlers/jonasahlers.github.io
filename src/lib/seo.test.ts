@@ -15,6 +15,7 @@ const empty: Profile = {
   projects: [],
   skills: [],
   education: [],
+  references: [],
 };
 
 test('describes the person', () => {

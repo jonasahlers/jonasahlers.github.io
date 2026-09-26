@@ -1,0 +1,37 @@
+---
+import type { Reference } from '../data/types';
+import { useTranslations } from '../i18n/ui';
+import Entry from './Entry.astro';
+import Period from './Period.astro';
+import Section from './Section.astro';
+
+interface Props {
+  references: Reference[];
+}
+
+const { references } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
+---
+
+<Section id="references" label={t('section.references')}>
+  <ol role="list">
+    {
+      references.map((reference) => (
+        <Entry title={reference.title} lang={reference.titleLang} href={reference.href}>
+          <Period slot="aside" start={reference.date} end={reference.date} />
+          <p class="source">{reference.source}</p>
+          {reference.summary && <p class="entry-text">{reference.summary}</p>}
+        </Entry>
+      ))
+    }
+  </ol>
+</Section>
+
+<style>
+  .source {
+    margin-top: 0.25rem;
+    color: var(--text);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+</style>

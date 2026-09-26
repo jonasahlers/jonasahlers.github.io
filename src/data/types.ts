@@ -1,3 +1,5 @@
+import type { Locale } from '../i18n/locales';
+
 /** A date as "YYYY" or "YYYY-MM", e.g. "2023" or "2023-04". */
 export type YearMonth = `${number}` | `${number}-${number}`;
 
@@ -47,6 +49,18 @@ export interface Education {
   details?: string;
 }
 
+/** A public mention: an article about you, an award, a talk. */
+export interface Reference {
+  title: string;
+  /** The title's language when it stays the same on every page, e.g. 'da' for a Danish headline. */
+  titleLang?: Locale;
+  /** Where it appeared, e.g. "Aktuel Naturvidenskab no. 3/2026, pp. 22–23". */
+  source: string;
+  date: YearMonth;
+  href?: string;
+  summary?: string;
+}
+
 export interface Profile {
   name: string;
   role: string;
@@ -67,4 +81,5 @@ export interface Profile {
   projects: Project[];
   skills: SkillGroup[];
   education: Education[];
+  references: Reference[];
 }

@@ -6,9 +6,11 @@ interface Props {
   title: string;
   /** Makes the whole entry a link. */
   href?: string;
+  /** The title's language, when it can differ from the page's. */
+  lang?: string;
 }
 
-const { title, href } = Astro.props;
+const { title, href, lang } = Astro.props;
 const t = useTranslations(Astro.currentLocale);
 ---
 
@@ -19,11 +21,11 @@ const t = useTranslations(Astro.currentLocale);
       {
         href ? (
           <a class="title-link" href={href} target="_blank" rel="noreferrer">
-            {title}&nbsp;<Icon name="arrow-up-right" size={14} class="arrow" />
+            <span lang={lang}>{title}</span>&nbsp;<Icon name="arrow-up-right" size={14} class="arrow" />
             <span class="sr-only"> {t('newTab')}</span>
           </a>
         ) : (
-          title
+          <span lang={lang}>{title}</span>
         )
       }
     </h3>

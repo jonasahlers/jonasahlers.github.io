@@ -15,17 +15,18 @@ const full: Profile = {
   projects: [{ name: 'Thing', description: 'A thing.' }],
   skills: [{ label: 'Languages', items: ['TypeScript'] }],
   education: [{ degree: 'BSc', school: 'Uni', start: '2018', end: '2021' }],
+  references: [{ title: 'Article', source: 'Magazine', date: '2026' }],
 };
 
 
 test('lists every section in page order', () => {
-  assert.deepEqual(visibleSections(full), ['about', 'experience', 'education', 'projects', 'skills', 'contact']);
+  assert.deepEqual(visibleSections(full), ['about', 'experience', 'education', 'projects', 'skills', 'references', 'contact']);
 });
 
 test('leaves out a section whose list is empty', () => {
-  assert.deepEqual(visibleSections({ ...full, experience: [], education: [] }), ['about', 'projects', 'skills', 'contact']);
+  assert.deepEqual(visibleSections({ ...full, experience: [], education: [], references: [] }), ['about', 'projects', 'skills', 'contact']);
 });
 
 test('always keeps the contact section', () => {
-  assert.deepEqual(visibleSections({ ...full, about: [], experience: [], projects: [], skills: [], education: [] }), ['contact']);
+  assert.deepEqual(visibleSections({ ...full, about: [], experience: [], projects: [], skills: [], education: [], references: [] }), ['contact']);
 });
