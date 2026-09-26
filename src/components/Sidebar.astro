@@ -14,18 +14,18 @@ const { profile, sections } = Astro.props;
 
 <header class="sidebar">
   <div>
-    <h1 class="name">{profile.name}</h1>
-    <p class="role">{profile.role}</p>
-    <p class="tagline">{profile.tagline}</p>
+    <h1 class="name reveal">{profile.name}</h1>
+    <p class="role reveal" style="--order: 1">{profile.role}</p>
+    <p class="tagline reveal" style="--order: 2">{profile.tagline}</p>
     {
       profile.location && (
-        <p class="location">
+        <p class="location reveal" style="--order: 3">
           <Icon name="map-pin" size={16} />
           {profile.location}
         </p>
       )
     }
-    <nav class="nav" aria-label="Sections">
+    <nav class="nav reveal" style="--order: 4" aria-label="Sections">
       <ul role="list">
         {
           sections.map(({ id, label }) => (
@@ -40,7 +40,7 @@ const { profile, sections } = Astro.props;
       </ul>
     </nav>
   </div>
-  <div class="footer">
+  <div class="footer reveal" style="--order: 5">
     <SocialLinks links={profile.socials} email={profile.email} />
     <ThemeToggle />
   </div>
@@ -102,7 +102,15 @@ const { profile, sections } = Astro.props;
       justify-content: space-between;
       width: 48%;
       max-height: 100vh;
-      padding-block: clamp(3rem, 12vh, 6rem);
+      padding-block: var(--page-top);
+    }
+  }
+
+  /* Too short to pin everything on screen: let the sidebar scroll with the page instead. */
+  @media (min-width: 1024px) and (max-height: 640px) {
+    .sidebar {
+      position: static;
+      max-height: none;
     }
   }
 
@@ -151,7 +159,7 @@ const { profile, sections } = Astro.props;
   @media (min-width: 1024px) {
     .nav {
       display: block;
-      margin-top: 4rem;
+      margin-top: clamp(2rem, 7vh, 4rem);
     }
   }
 
@@ -159,7 +167,7 @@ const { profile, sections } = Astro.props;
     display: inline-flex;
     align-items: center;
     gap: 1rem;
-    padding-block: 0.75rem;
+    padding-block: 0.625rem;
     color: var(--muted);
     font-size: 0.75rem;
     font-weight: 700;

@@ -32,7 +32,7 @@ const year = new Date().getFullYear();
   <Spotlight />
   <div class="page">
     <Sidebar profile={profile} sections={sections} />
-    <main id="content" tabindex="-1">
+    <main id="content" class="reveal" style="--order: 2" tabindex="-1">
       {has('about') && <About paragraphs={profile.about} />}
       {has('experience') && <Experience jobs={profile.experience} />}
       {has('projects') && <Projects projects={profile.projects} />}
@@ -54,7 +54,7 @@ const year = new Date().getFullYear();
   }
 
   main {
-    padding-block: 4rem 0;
+    padding-block: 2rem 0;
   }
 
   main:focus {
@@ -70,7 +70,7 @@ const year = new Date().getFullYear();
 
     main {
       width: 52%;
-      padding-block: 6rem 0;
+      padding-block: var(--page-top) 0;
     }
   }
 

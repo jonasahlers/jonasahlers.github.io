@@ -8,11 +8,10 @@ interface Props {
 }
 
 const { title, href } = Astro.props;
-const hasAside = Astro.slots.has('aside');
 ---
 
-<li class:list={['entry', { 'has-aside': hasAside }]}>
-  {hasAside && <div class="aside"><slot name="aside" /></div>}
+<li class="entry">
+  <div class="aside"><slot name="aside" /></div>
   <div class="body">
     <h3 class="title">
       {
@@ -43,10 +42,20 @@ const hasAside = Astro.slots.has('aside');
     margin-top: 1rem;
   }
 
+  .aside:empty {
+    display: none;
+  }
+
+  /* Every row keeps the aside column, even when it's empty (a project without a screenshot),
+     so all titles share one vertical axis. */
   @media (min-width: 640px) {
-    .entry.has-aside {
+    .entry {
       grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
       gap: 1.5rem;
+    }
+
+    .aside:empty {
+      display: block;
     }
   }
 

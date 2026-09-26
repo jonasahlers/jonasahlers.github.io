@@ -87,7 +87,8 @@ src/pages/favicon.svg.ts monogram favicon generated from the owner's initials at
 - `Job`: `role`, `company`, `href?`, `location?`, `start`, `end?` (omitted = current),
   `summary`, `tech?: string[]`
 - `Project`: `name`, `description`, `href?` (live), `repo?` (source), `image?` (imported asset,
-  shown as the row's left-column thumbnail; without it the content spans the row), `tech?`
+  shown as the row's left-column thumbnail; without it that column stays empty, so every row's
+  text shares one axis), `tech?`
 - `SkillGroup`: `label`, `items: string[]` — rendered as label column + tags
 - `Education`: `degree`, `school`, `href?`, `start`, `end?`, `details?`
 
