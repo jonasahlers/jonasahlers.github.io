@@ -164,3 +164,18 @@ worse).
   `#025f40`) and the glow capped at 13% / 10%, so text passes 4.5:1 even at the glow's peak.
 - **Constraints kept:** no new dependencies, no JavaScript needed for any content, ≥4.5:1 text
   contrast in both themes, every hover with a focus twin, motion gated by reduced motion.
+
+## Iteration 3: real content and a blue palette
+
+- **Content** comes from the owner's CV (`CV_2025.pdf`): education, experience, skills, spoken
+  languages (as a skill group), the bachelor project, and GitHub/LinkedIn links. The phone number
+  stays off the public page, the placeholder availability pill is dropped (the CV doesn't state
+  one), and the temporary `noindex` is removed.
+- **Section order** for a student profile: About → Experience → Education → Projects → Skills →
+  Contact. Education is a primary credential and gives the main project its context.
+- **Palette:** blue, echoing the CV's steel-blue headings so the site and the PDF read as a set.
+  Light `--accent` `#075985` with `--accent-2` indigo `#4f46e5`; dark `#7dd3fc` with `#a5b4fc`.
+  Every text pair passes 4.5:1, including the glow peak (worst case 4.58:1 light, 5.18:1 dark).
+- **Display type:** the name is set in Instrument Serif (a single 400 weight, Latin subset, via the
+  Fonts API), echoing the serif name on the CV. Everything else stays Inter.
+- **Structured data:** `alumniOf` uses `EducationalOrganization`, which also fits the gymnasium.
