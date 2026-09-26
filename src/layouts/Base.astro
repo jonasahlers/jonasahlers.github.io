@@ -31,6 +31,8 @@ const structuredData = JSON.stringify(jsonLd).replace(/</g, '\\u003c');
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary" />
     <meta name="generator" content={Astro.generator} />
+    {/* TEMPORARY: profile.ts still holds placeholder jobs. Remove this with the real CV content. */}
+    <meta name="robots" content="noindex" />
     <Font cssVariable="--font-inter" preload />
     <script is:inline>
       // Apply a saved dark theme before first paint so the page never flashes light.
