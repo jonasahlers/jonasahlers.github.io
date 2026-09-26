@@ -2016,11 +2016,13 @@ Replace the `<main>` element with:
   {has('education') && <Education entries={profile.education} />}
   <Contact email={profile.email} note={profile.contactNote} socials={profile.socials} />
   <footer class="colophon">
-    <p>
-      © {year} {profile.name}. Built with <a class="link" href="https://astro.build" target="_blank" rel="noreferrer">Astro<span class="sr-only"> (opens in a new tab)</span></a>
-      and hosted on GitHub Pages.
-    </p>
+    <p>© {year} {profile.name}. Built with <a class="link" href="https://astro.build" target="_blank" rel="noreferrer">Astro<span class="sr-only"> (opens in a new tab)</span></a> and hosted on GitHub Pages.</p>
   </footer>
+```
+
+Keep that `<p>` on one line: Astro drops whitespace-only text between line breaks, which turns "© 2026 Jonas" into "© 2026Jonas" and "Astro and" into "Astroand".
+
+```astro
 </main>
 ```
 
