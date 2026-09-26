@@ -1,6 +1,7 @@
 ---
 import type { Profile } from '../data/types';
 import type { SectionLink } from '../lib/sections';
+import Avatar from './Avatar.astro';
 import Icon from './Icon.astro';
 import SocialLinks from './SocialLinks.astro';
 import ThemeToggle from './ThemeToggle.astro';
@@ -15,18 +16,29 @@ const { profile, sections } = Astro.props;
 
 <header class="sidebar">
   <div>
-    <h1 class="name reveal">{profile.name}</h1>
-    <p class="role reveal" style="--order: 1">{profile.role}</p>
-    <p class="tagline reveal" style="--order: 2">{profile.tagline}</p>
+    <div class="identity reveal">
+      <Avatar name={profile.name} photo={profile.avatar} />
+      {
+        profile.availability && (
+          <p class="status">
+            <span class="status-dot" aria-hidden="true" />
+            {profile.availability}
+          </p>
+        )
+      }
+    </div>
+    <h1 class="name reveal" style="--order: 1">{profile.name}</h1>
+    <p class="role reveal" style="--order: 2">{profile.role}</p>
+    <p class="tagline reveal" style="--order: 3">{profile.tagline}</p>
     {
       profile.location && (
-        <p class="location reveal" style="--order: 3">
+        <p class="location reveal" style="--order: 4">
           <Icon name="map-pin" size={16} />
           {profile.location}
         </p>
       )
     }
-    <nav class="nav reveal" style="--order: 4" aria-label="Sections">
+    <nav class="nav reveal" style="--order: 5" aria-label="Sections">
       <ul role="list">
         {
           sections.map(({ id, label }) => (
@@ -41,7 +53,7 @@ const { profile, sections } = Astro.props;
       </ul>
     </nav>
   </div>
-  <div class="footer reveal" style="--order: 5">
+  <div class="footer reveal" style="--order: 6">
     <SocialLinks links={profile.socials} email={profile.email} />
     <ThemeToggle />
   </div>
@@ -124,18 +136,67 @@ const { profile, sections } = Astro.props;
     }
   }
 
+  .identity {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  .status-dot {
+    position: relative;
+    flex: none;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .status-dot::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: currentColor;
+      animation: ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+  }
+
+  @keyframes ping {
+    70%,
+    100% {
+      transform: scale(2.6);
+      opacity: 0;
+    }
+  }
+
   .name {
     color: var(--text);
-    font-size: clamp(2.25rem, 1.6rem + 2.4vw, 3rem);
+    font-size: clamp(2.5rem, 1.7rem + 2.8vw, 3.5rem);
     font-weight: 700;
-    letter-spacing: -0.025em;
-    line-height: 1.1;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
     text-wrap: balance;
   }
 
   .role {
     margin-top: 0.75rem;
-    color: var(--text);
+    color: var(--accent);
     font-size: 1.125rem;
     font-weight: 500;
     letter-spacing: -0.01em;
@@ -203,6 +264,10 @@ const { profile, sections } = Astro.props;
   .nav-link:focus-visible .nav-line,
   .nav-link[aria-current] .nav-line {
     width: 4rem;
+  }
+
+  .nav-link[aria-current] .nav-line {
+    background: var(--accent);
   }
 
   .footer {

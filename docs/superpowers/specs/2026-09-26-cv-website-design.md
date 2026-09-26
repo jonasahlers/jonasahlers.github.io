@@ -155,8 +155,9 @@ worse).
 - **Right column:** section headings are visible on desktop too, as a small label followed by a
   hairline rule. The first About paragraph is a lede: larger and in full-contrast text.
 - **Projects:** a project without `image` gets a generated cover in the left column: an
-  accent-tinted tile with one of four CSS patterns (picked deterministically from the name by
-  `coverPattern`) and the project's initial. Decorative, `aria-hidden`.
+  accent-tinted tile with one of four CSS patterns (picked by the project's position, so
+  neighbours always differ) and the project's initial. Decorative, `aria-hidden`, hidden on
+  phones where the column stacks.
 - **Contact:** the section becomes a closing card (surface, border, corner glow) with the note set
   larger.
 - **Constraints kept:** no new dependencies, no JavaScript needed for any content, ≥4.5:1 text

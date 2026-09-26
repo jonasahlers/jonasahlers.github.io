@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import type { Project } from '../data/types';
 import Entry from './Entry.astro';
 import Icon from './Icon.astro';
+import ProjectCover from './ProjectCover.astro';
 import Section from './Section.astro';
 import TagList from './TagList.astro';
 
@@ -16,12 +17,14 @@ const { projects } = Astro.props;
 <Section id="projects" label="Projects">
   <ol role="list">
     {
-      projects.map((project) => (
+      projects.map((project, index) => (
         <Entry title={project.name} href={project.href ?? project.repo}>
-          {project.image && (
+          {project.image ? (
             <div slot="aside" class="thumb">
               <Image src={project.image} alt="" width={320} />
             </div>
+          ) : (
+            <ProjectCover slot="aside" name={project.name} index={index} />
           )}
           <p class="entry-text">{project.description}</p>
           {project.href && project.repo && (

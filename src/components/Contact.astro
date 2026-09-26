@@ -13,35 +13,37 @@ const { email, note, socials } = Astro.props;
 ---
 
 <Section id="contact" label="Contact">
-  <p class="note">{note}</p>
-  <div class="actions">
-    <a class="email" href={`mailto:${email}`}>
-      <Icon name="mail" size={18} />
-      {email}
-    </a>
-    <button class="copy" type="button" data-copy={email} hidden>
-      <span class="copy-icon"><Icon name="copy" size={16} /></span>
-      <span class="check-icon"><Icon name="check" size={16} /></span>
-      <span data-copy-label>Copy</span><span class="sr-only"> email address</span>
-    </button>
-    <p class="sr-only" aria-live="polite" data-copy-status></p>
+  <div class="card">
+    <p class="note">{note}</p>
+    <div class="actions">
+      <a class="email" href={`mailto:${email}`}>
+        <Icon name="mail" size={18} />
+        {email}
+      </a>
+      <button class="copy" type="button" data-copy={email} hidden>
+        <span class="copy-icon"><Icon name="copy" size={16} /></span>
+        <span class="check-icon"><Icon name="check" size={16} /></span>
+        <span data-copy-label>Copy</span><span class="sr-only"> email address</span>
+      </button>
+      <p class="sr-only" aria-live="polite" data-copy-status></p>
+    </div>
+    {
+      socials.length > 0 && (
+        <p class="elsewhere">
+          Also on{' '}
+          {socials.map(({ label, href }, index) => (
+            <>
+              {index > 0 && (index === socials.length - 1 ? ' and ' : ', ')}
+              <a class="link" href={href} target="_blank" rel="noreferrer">
+                {label}
+                <span class="sr-only"> (opens in a new tab)</span>
+              </a>
+            </>
+          ))}.
+        </p>
+      )
+    }
   </div>
-  {
-    socials.length > 0 && (
-      <p class="elsewhere">
-        Also on{' '}
-        {socials.map(({ label, href }, index) => (
-          <>
-            {index > 0 && (index === socials.length - 1 ? ' and ' : ', ')}
-            <a class="link" href={href} target="_blank" rel="noreferrer">
-              {label}
-              <span class="sr-only"> (opens in a new tab)</span>
-            </a>
-          </>
-        ))}.
-      </p>
-    )
-  }
 </Section>
 
 <script>
@@ -79,8 +81,35 @@ const { email, note, socials } = Astro.props;
 </script>
 
 <style>
+  /* A closing card with a soft accent glow in one corner. */
+  .card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: 2rem;
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    background: var(--surface);
+    box-shadow: var(--card-shadow);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: -60%;
+    right: -25%;
+    z-index: -1;
+    width: 70%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, var(--glow), var(--glow-2) 40%, transparent 70%);
+    pointer-events: none;
+  }
+
   .note {
     max-width: 32rem;
+    color: var(--text);
+    font-size: 1.125rem;
+    line-height: 1.6;
     text-wrap: pretty;
   }
 

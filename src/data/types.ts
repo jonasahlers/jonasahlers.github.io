@@ -53,6 +53,10 @@ export interface Profile {
   /** One sentence under your name; also the page's meta description. */
   tagline: string;
   location?: string;
+  /** Square photo imported from src/assets; without it, a monogram of your initials is shown. */
+  avatar?: ImageMetadata;
+  /** Short status shown as a pill next to your avatar, e.g. "Open to new opportunities". */
+  availability?: string;
   /** Paragraphs of the About section. */
   about: string[];
   email: string;

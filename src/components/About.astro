@@ -20,4 +20,12 @@ const { paragraphs } = Astro.props;
     gap: 1rem;
     text-wrap: pretty;
   }
+
+  /* The first paragraph is the lede: what a visitor reads first. */
+  .about p:first-child {
+    color: var(--text);
+    font-size: 1.25rem;
+    line-height: 1.55;
+    letter-spacing: -0.012em;
+  }
 </style>

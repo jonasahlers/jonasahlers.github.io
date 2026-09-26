@@ -1,0 +1,42 @@
+---
+import { Image } from 'astro:assets';
+import { initials } from '../lib/format';
+
+interface Props {
+  name: string;
+  photo?: ImageMetadata;
+}
+
+const { name, photo } = Astro.props;
+---
+
+{/* Decorative: the name is printed right beside it. */}
+<span class="avatar" aria-hidden="true">
+  {photo ? <Image src={photo} alt="" width={128} height={128} /> : initials(name)}
+</span>
+
+<style>
+  .avatar {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 4rem;
+    height: 4rem;
+    overflow: hidden;
+    border-radius: 1.125rem;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: var(--on-accent);
+    font-size: 1.375rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.25),
+      0 12px 28px -14px var(--accent);
+  }
+
+  .avatar :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>

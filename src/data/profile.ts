@@ -8,6 +8,7 @@ export const profile: Profile = {
   tagline:
     'I build reliable, thoughtfully designed software, from backend services to the interfaces people use every day.',
   location: 'Denmark',
+  availability: 'Open to new opportunities',
   about: [
     'I’m a software engineer who enjoys turning messy, real-world problems into simple and dependable products. I care about clean architecture, fast feedback loops, and interfaces that feel effortless.',
     'Right now I work on e-commerce systems that serve customers in many markets. Before that I built internal tools and APIs, and taught algorithms and data structures at university.',

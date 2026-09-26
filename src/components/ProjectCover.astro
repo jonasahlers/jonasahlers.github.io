@@ -1,0 +1,78 @@
+---
+// A generated cover for a project without a screenshot: an accent-tinted tile with a CSS pattern
+// and the project's initial. The pattern follows the project's position, so neighbours differ.
+const PATTERNS = ['dots', 'lines', 'grid', 'rings'] as const;
+
+interface Props {
+  name: string;
+  index: number;
+}
+
+const { name, index } = Astro.props;
+const pattern = PATTERNS[index % PATTERNS.length];
+---
+
+<div class:list={['cover', pattern]} aria-hidden="true">
+  <span class="initial">{name.charAt(0).toUpperCase()}</span>
+</div>
+
+<style>
+  .cover {
+    --ink: color-mix(in srgb, var(--accent) 22%, transparent);
+    display: none;
+    place-items: center;
+    aspect-ratio: 16 / 10;
+    border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--border));
+    border-radius: 0.5rem;
+    background-color: color-mix(in srgb, var(--accent) 6%, var(--surface));
+    transition: border-color 150ms ease;
+  }
+
+  /* Decorative only: on phones the column stacks, so the cover would just push content down. */
+  @media (min-width: 640px) {
+    .cover {
+      display: grid;
+    }
+  }
+
+  .dots {
+    background-image: radial-gradient(var(--ink) 1.2px, transparent 1.5px);
+    background-size: 12px 12px;
+  }
+
+  .lines {
+    background-image: repeating-linear-gradient(135deg, var(--ink) 0 1px, transparent 1px 9px);
+  }
+
+  .grid {
+    background-image:
+      linear-gradient(var(--ink) 1px, transparent 1px),
+      linear-gradient(90deg, var(--ink) 1px, transparent 1px);
+    background-size: 14px 14px;
+  }
+
+  .rings {
+    background-image: repeating-radial-gradient(circle at 100% 100%, var(--ink) 0 1px, transparent 1px 10px);
+  }
+
+  .initial {
+    color: var(--accent);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    text-shadow:
+      0 0 12px var(--surface),
+      0 0 4px var(--surface);
+  }
+
+  @media (hover: hover) {
+    :global(.entry:hover) .cover {
+      border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+    }
+  }
+
+  :global(.entry:has(.title-link:focus-visible)) .cover {
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+  }
+</style>

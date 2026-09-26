@@ -33,21 +33,28 @@ const { id, label } = Astro.props;
     text-transform: uppercase;
   }
 
-  /* Desktop: the sidebar nav names the sections, so headings stay for screen readers only. */
+  /* Desktop: a quiet label followed by a hairline rule. */
   @media (min-width: 1024px) {
     .section {
       margin-bottom: 7.5rem;
     }
 
     .heading {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      margin: -1px;
+      position: static;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 0 0 1.75rem;
       padding: 0;
-      overflow: hidden;
-      clip: rect(0 0 0 0);
-      white-space: nowrap;
+      background: none;
+      backdrop-filter: none;
+    }
+
+    .heading::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
     }
   }
 </style>

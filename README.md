@@ -14,7 +14,10 @@ date (`"2023"` or `"2023-04"`) fails the build and the live site stays on the la
 - Leave a list empty (for example `education: []`) to hide that section and its menu item.
 - Leave out `end` for your current job; it shows as "Present".
 - To show a project screenshot, put the image in `src/assets/`, import it at the top
-  (`import shot from '../assets/shot.png'`), and set `image: shot` on the project.
+  (`import shot from '../assets/shot.png'`), and set `image: shot` on the project. Projects
+  without one get a generated pattern cover.
+- Add a square photo the same way as `avatar` (otherwise your initials are shown), and set or
+  remove `availability` to control the status pill next to it.
 
 ## Run it locally
 
