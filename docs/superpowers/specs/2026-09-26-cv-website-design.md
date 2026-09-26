@@ -137,3 +137,27 @@ No GitHub connector exists in the connector directory, so the GitHub CLI stands 
 
 Claude then creates the public repo `jonasahlers/jonasahlers.github.io`, pushes, and enables Pages
 with `build_type=workflow` via `gh api`.
+
+## Visual refresh (iteration 2)
+
+The first version was clean but flat: pale gray on pale gray, no focal point beyond the name, projects
+indistinguishable from jobs, and a quiet ending. Direction chosen: keep the Night Shift layout and its
+restraint, and add depth and focal points. Alternatives considered and rejected: a giant-name
+editorial layout (abandons the chosen layout) and gradient bento cards (reads as a template, scans
+worse).
+
+- **Atmosphere:** a fixed, soft two-tone glow (accent plus a cool secondary hue) at the top left,
+  and a faint dot grid masked to fade out from the same corner. CSS only, behind all content.
+- **Identity block:** an avatar above the name (optional `avatar` photo in the profile; otherwise
+  a gradient monogram of the initials) with an optional availability pill (`availability` text,
+  pulsing dot, static under reduced motion). The name grows to 3.5rem with tighter tracking; the
+  role takes the accent color; the active nav line turns accent.
+- **Right column:** section headings are visible on desktop too, as a small label followed by a
+  hairline rule. The first About paragraph is a lede: larger and in full-contrast text.
+- **Projects:** a project without `image` gets a generated cover in the left column: an
+  accent-tinted tile with one of four CSS patterns (picked deterministically from the name by
+  `coverPattern`) and the project's initial. Decorative, `aria-hidden`.
+- **Contact:** the section becomes a closing card (surface, border, corner glow) with the note set
+  larger.
+- **Constraints kept:** no new dependencies, no JavaScript needed for any content, ≥4.5:1 text
+  contrast in both themes, every hover with a focus twin, motion gated by reduced motion.
